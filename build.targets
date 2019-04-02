@@ -1,0 +1,7 @@
+# A successful build produces the following files:
+platform-info/target/lib-platform-info-*-SNAPSHOT-with-dependencies.jar
+platform-info/target/lib-platform-info-*-SNAPSHOT-dependencies.zip
+platform-info/target/lib-platform-info-*-SNAPSHOT.jar
+platform-info/target/lib-platform-info-*-SNAPSHOT-javadoc.zip
+platform-info-integration/target/platform-info-integration-*-SNAPSHOT.jar
+platform-info-integration/target/platform-info-integration-*-SNAPSHOT-with-dependencies.jar

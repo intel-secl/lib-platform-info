@@ -1,0 +1,1318 @@
+Intel(r) TXT Configuration Registers:
+	STS: 0x0001c091
+	    senter_done: TRUE
+	    sexit_done: FALSE
+	    mem_config_lock: FALSE
+	    private_open: TRUE
+	    locality_1_open: TRUE
+	    locality_2_open: TRUE
+	ESTS: 0x00
+	    txt_reset: FALSE
+	E2STS: 0x000000000000000e
+	    secrets: TRUE
+	ERRORCODE: 0x00000000
+	DIDVID: 0x00000001b0028086
+	    vendor_id: 0x8086
+	    device_id: 0xb002
+	    revision_id: 0x1
+	FSBIF: 0xffffffffffffffff
+	QPIIF: 0x000000009d003000
+	SINIT.BASE: 0x7bf00000
+	SINIT.SIZE: 131072B (0x20000)
+	HEAP.BASE: 0x7bf20000
+	HEAP.SIZE: 917504B (0xe0000)
+	DPR: 0x000000007c000081
+	    lock: TRUE
+	    top: 0x7c000000
+	    size: 8MB (8388608B)
+	PUBLIC.KEY:
+	    2d 67 dd d7 5e f9 33 92 66 a5 6f 27 18 95 55 ae 
+	    77 a2 b0 de 77 42 22 e5 de 24 8d be b8 e3 3d d7 
+
+***********************************************************
+	 TXT measured launch: TRUE
+	 secrets flag set: TRUE
+***********************************************************
+TBOOT log:
+	 max_size=32706
+	 zip_count=1
+	 zip_pos[0] = 0
+	 zip_size[0] = 9599
+	 curr_pos=25077
+	 buf:
+TBOOT: ******************* TBOOT *******************
+TBOOT:    2016-12-16 12:00 -0800 1.9.5
+TBOOT: *********************************************
+TBOOT: command line: logging=serial,memory,vga measure_nv=true
+TBOOT: IA32_FEATURE_CONTROL_MSR: 0000ff07
+TBOOT: CPU is SMX-capable
+TBOOT: CPU is VMX-capable
+TBOOT: SMX is enabled
+TBOOT: TXT chipset and all needed capabilities present
+TBOOT: IA32_FEATURE_CONTROL_MSR: 0000ff07
+TBOOT: CPU is SMX-capable
+TBOOT: CPU is VMX-capable
+TBOOT: SMX is enabled
+TBOOT: TXT chipset and all needed capabilities present
+TBOOT: BSP is cpu 0
+TBOOT: original e820 map:
+TBOOT: 	0000000000000000 - 000000000009b400  (1)
+TBOOT: 	000000000009b400 - 00000000000a0000  (2)
+TBOOT: 	00000000000e0000 - 0000000000100000  (2)
+TBOOT: 	0000000000100000 - 0000000076219000  (1)
+TBOOT: 	0000000076219000 - 00000000762c6000  (3)
+TBOOT: 	00000000762c6000 - 000000007a1d3000  (1)
+TBOOT: 	000000007a1d3000 - 000000007accf000  (2)
+TBOOT: 	000000007accf000 - 000000007b6ff000  (4)
+TBOOT: 	000000007b6ff000 - 000000007b7d7000  (3)
+TBOOT: 	000000007b7d7000 - 000000007b800000  (1)
+TBOOT: 	000000007b800000 - 0000000090000000  (2)
+TBOOT: 	00000000fed1c000 - 00000000fed25000  (2)
+TBOOT: 	00000000fed30000 - 00000000fed35000  (2)
+TBOOT: 	00000000fed40000 - 00000000fed45000  (2)
+TBOOT: 	00000000ff400000 - 0000000100000000  (2)
+TBOOT: 	0000000100000000 - 0000000880000000  (1)
+TBOOT: TPM: FIFO_INF Locality 0 is open
+TBOOT: TPM: discrete TPM1.2 Family 0x0
+TBOOT: TPM is ready
+TBOOT: TPM nv_locked: TRUE
+TBOOT: TPM timeout values: A: 750, B: 750, C: 750, D: 750
+TBOOT: Wrong timeout B, fallback to 2000
+TBOOT: Wrong timeout C, fallback to 75000
+TBOOT: checking if module  is an SINIT for this platform...
+TBOOT: 	 ACM size is too small: acmod_size=1356234, acm_hdr->size*4=c0c0c0c0
+TBOOT: no SINIT AC module found
+TBOOT: TXT.SINIT.BASE: 0x7bf00000
+TBOOT: TXT.SINIT.SIZE: 0x20000 (131072)
+TBOOT: BIOS has already loaded an SINIT module
+TBOOT: chipset production fused: 1
+TBOOT: chipset ids: vendor: 0x8086, device: 0xb002, revision: 0x1
+TBOOT: processor family/model/stepping: 0x306f2
+TBOOT: platform id: 0x0
+TBOOT: 	 1 ACM chipset id entries:
+TBOOT: 	     vendor: 0x8086, device: 0xb002, flags: 0x1, revision: 0x1, extended: 0x0
+TBOOT: 	 3 ACM processor id entries:
+TBOOT: 	     fms: 0x306f0, fms_mask: 0xfff3ff0, platform_id: 0x0, platform_mask: 0x0
+TBOOT: no SINIT provided by bootloader; using BIOS SINIT
+TBOOT: AC mod base alignment OK
+TBOOT: AC mod size OK
+TBOOT: AC module header dump for SINIT:
+TBOOT: 	 type: 0x2 (ACM_TYPE_CHIPSET)
+TBOOT: 	 subtype: 0x0 
+TBOOT: 	 length: 0xa1 (161)
+TBOOT: 	 version: 0
+TBOOT: 	 chipset_id: 0x1d00
+TBOOT: 	 flags: 0x0
+TBOOT: 		 pre_production: 0
+TBOOT: 		 debug_signed: 0
+TBOOT: 	 vendor: 0x8086
+TBOOT: 	 date: 0x20140930
+TBOOT: 	 size*4: 0x20000 (131072)
+TBOOT: 	 txt_svn: 0x00000001
+TBOOT: 	 se_svn: 0x00000000
+TBOOT: 	 code_control: 0x0
+TBOOT: 	 entry point: 0x00000008:00009940
+TBOOT: 	 scratch_size: 0x8f (143)
+TBOOT: 	 info_table:
+TBOOT: 		 uuid: {0x7fc03aaa, 0x46a7, 0x18db, 0xac2e,
+		{0x69, 0x8f, 0x8d, 0x41, 0x7f, 0x5a}}
+TBOOT: 		     ACM_UUID_V3
+TBOOT: 		 chipset_acm_type: 0x1 (SINIT)
+TBOOT: 		 version: 5
+TBOOT: 		 length: 0x30 (48)
+TBOOT: 		 chipset_id_list: 0x4f0
+TBOOT: 		 os_sinit_data_ver: 0x7
+TBOOT: 		 min_mle_hdr_ver: 0x00020000
+TBOOT: 		 capabilities: 0x000000a5
+TBOOT: 		     rlp_wake_getsec: 1
+TBOOT: 		     rlp_wake_monitor: 0
+TBOOT: 		     ecx_pgtbl: 1
+TBOOT: 		     stm: 0
+TBOOT: 		     pcr_map_no_legacy: 0
+TBOOT: 		     pcr_map_da: 1
+TBOOT: 		     platform_type: 2
+TBOOT: 		     max_phy_addr: 0
+TBOOT: 		 acm_ver: 59
+TBOOT: 	 chipset list:
+TBOOT: 		 count: 1
+TBOOT: 		 entry 0:
+TBOOT: 		     flags: 0x1
+TBOOT: 		     vendor_id: 0x8086
+TBOOT: 		     device_id: 0xb002
+TBOOT: 		     revision_id: 0x1
+TBOOT: 		     extended_id: 0x0
+TBOOT: 	 processor list:
+TBOOT: 		 count: 3
+TBOOT: 		 entry 0:
+TBOOT: 		     fms: 0x306f0
+TBOOT: 		     fms_mask: 0xfff3ff0
+TBOOT: 		     platform_id: 0x0
+TBOOT: 		     platform_mask: 0x0
+TBOOT: 		 entry 1:
+TBOOT: 		     fms: 0x50660
+TBOOT: 		     fms_mask: 0xfff3ff0
+TBOOT: 		     platform_id: 0x0
+TBOOT: 		     platform_mask: 0x0
+TBOOT: 		 entry 2:
+TBOOT: 		     fms: 0x406f0
+TBOOT: 		     fms_mask: 0xfff3ff0
+TBOOT: 		     platform_id: 0x0
+TBOOT: 		     platform_mask: 0x0
+TBOOT: 	 TPM info list:
+TBOOT: 		 TPM capability:
+TBOOT: 		      ext_policy: 0x3
+TBOOT: 		      tpm_family : 0x3
+TBOOT: 		      tpm_nv_index_set : 0x0
+TBOOT: 		 alg count: 4
+TBOOT: 		     alg_id: 0x4
+TBOOT: 		     alg_id: 0xb
+TBOOT: 		     alg_id: 0x12
+TBOOT: 		     alg_id: 0x14
+TBOOT: SGX:verify_IA32_se_svn_status is called
+TBOOT: SGX is not enabled, cpuid.ebx: 0x37ab
+TBOOT: reading Verified Launch Policy from TPM NV...
+TBOOT: TPM: get capability, return value = 00000002
+TBOOT: TPM: fail to get public data of 0x20000001 in TPM NV
+TBOOT: 	:reading failed
+TBOOT: reading Launch Control Policy from TPM NV...
+TBOOT: TPM: get capability, return value = 00000002
+TBOOT: TPM: fail to get public data of 0x40000001 in TPM NV
+TBOOT: 	:reading failed
+TBOOT: failed to read policy from TPM NV, using default
+TBOOT: policy:
+TBOOT: 	 version: 2
+TBOOT: 	 policy_type: TB_POLTYPE_CONT_NON_FATAL
+TBOOT: 	 hash_alg: TB_HALG_SHA1
+TBOOT: 	 policy_control: 00000001 (EXTEND_PCR17)
+TBOOT: 	 num_entries: 3
+TBOOT: 	 policy entry[0]:
+TBOOT: 		 mod_num: 0
+TBOOT: 		 pcr: none
+TBOOT: 		 hash_type: TB_HTYPE_ANY
+TBOOT: 		 num_hashes: 0
+TBOOT: 	 policy entry[1]:
+TBOOT: 		 mod_num: any
+TBOOT: 		 pcr: 19
+TBOOT: 		 hash_type: TB_HTYPE_ANY
+TBOOT: 		 num_hashes: 0
+TBOOT: 	 policy entry[2]:
+TBOOT: 		 mod_num: nv_raw
+		 nv_index: 40000010
+TBOOT: 		 pcr: 22
+TBOOT: 		 hash_type: TB_HTYPE_ANY
+TBOOT: 		 num_hashes: 0
+TBOOT: TPM: write nv 20000002, offset 00000000, 00000004 bytes, return = 00000002
+TBOOT: Error: write TPM error: 0x2.
+TBOOT: no policy in TPM NV.
+TBOOT: IA32_FEATURE_CONTROL_MSR: 0000ff07
+TBOOT: CPU is SMX-capable
+TBOOT: CPU is VMX-capable
+TBOOT: SMX is enabled
+TBOOT: TXT chipset and all needed capabilities present
+TBOOT: TXT.ERRORCODE: 0x0
+TBOOT: TXT.ESTS: 0x0
+TBOOT: TXT.E2STS: 0x8
+TBOOT: IA32_FEATURE_CONTROL_MSR: 0000ff07
+TBOOT: CPU is SMX-capable
+TBOOT: CPU is VMX-capable
+TBOOT: SMX is enabled
+TBOOT: TXT chipset and all needed capabilities present
+TBOOT: TXT.HEAP.BASE: 0x7bf20000
+TBOOT: TXT.HEAP.SIZE: 0xe0000 (917504)
+TBOOT: bios_data (@0x7bf20008, 0x2c):
+TBOOT: 	 version: 3
+TBOOT: 	 bios_sinit_size: 0x20000 (131072)
+TBOOT: 	 lcp_pd_base: 0x7b800000
+TBOOT: 	 lcp_pd_size: 0x300c (12300)
+TBOOT: 	 num_logical_procs: 72
+TBOOT: 	 flags: 0x00000000
+TBOOT: IA32_FEATURE_CONTROL_MSR: 0000ff07
+TBOOT: CPU is SMX-capable
+TBOOT: CPU is VMX-capable
+TBOOT: SMX is enabled
+TBOOT: TXT chipset and all needed capabilities present
+TBOOT: CR0.NE not set
+TBOOT: CR0 and EFLAGS OK
+TBOOT: supports preserving machine check errors
+TBOOT: CPU support processor-based S-CRTM
+TBOOT: CPU is ready for SENTER
+TBOOT: checking previous errors on the last boot.
+	TPM: read nv index 20000002 offset 00000000, return value = 00000002
+TBOOT: Error: read TPM error: 0x2.
+TBOOT: last boot has no error.
+TBOOT: file addresses:
+TBOOT: 	 &_start=0x804000
+TBOOT: 	 &_end=0xb54a60
+TBOOT: 	 &_mle_start=0x804000
+TBOOT: 	 &_mle_end=0x839000
+TBOOT: 	 &_post_launch_entry=0x804010
+TBOOT: 	 &_txt_wakeup=0x804200
+TBOOT: 	 &g_mle_hdr=0x81de40
+TBOOT: MLE header:
+TBOOT: 	 uuid={0x9082ac5a, 0x476f, 0x74a7, 0x5c0f,
+		{0x55, 0xa2, 0xcb, 0x51, 0xb6, 0x42}}
+TBOOT: 	 length=34
+TBOOT: 	 version=00020001
+TBOOT: 	 entry_point=00000010
+TBOOT: 	 first_valid_page=00000000
+TBOOT: 	 mle_start_off=4000
+TBOOT: 	 mle_end_off=39000
+TBOOT: 	 capabilities: 0x00000027
+TBOOT: 	     rlp_wake_getsec: 1
+TBOOT: 	     rlp_wake_monitor: 1
+TBOOT: 	     ecx_pgtbl: 1
+TBOOT: 	     stm: 0
+TBOOT: 	     pcr_map_no_legacy: 0
+TBOOT: 	     pcr_map_da: 1
+TBOOT: 	     platform_type: 0
+TBOOT: 	     max_phy_addr: 0
+TBOOT: MLE start=0x804000, end=0x839000, size=0x35000
+TBOOT: ptab_size=3000, ptab_base=0x801000
+TBOOT: TXT.HEAP.BASE: 0x7bf20000
+TBOOT: TXT.HEAP.SIZE: 0xe0000 (917504)
+TBOOT: bios_data (@0x7bf20008, 0x2c):
+TBOOT: 	 version: 3
+TBOOT: 	 bios_sinit_size: 0x20000 (131072)
+TBOOT: 	 lcp_pd_base: 0x7b800000
+TBOOT: 	 lcp_pd_size: 0x300c (12300)
+TBOOT: 	 num_logical_procs: 72
+TBOOT: 	 flags: 0x00000000
+TBOOT: discarding RAM above reserved regions: 0x762c6000 - 0x7a1d3000
+TBOOT: discarding RAM above reserved regions: 0x7b7d7000 - 0x7b800000
+TBOOT: min_lo_ram: 0x0, max_lo_ram: 0x76219000
+TBOOT: min_hi_ram: 0x100000000, max_hi_ram: 0x880000000
+TBOOT: no LCP module found
+TBOOT: os_sinit_data (@0x7bf35154, 0x7c):
+TBOOT: 	 version: 7
+TBOOT: 	 flags: 0
+TBOOT: 	 mle_ptab: 0x801000
+TBOOT: 	 mle_size: 0x35000 (217088)
+TBOOT: 	 mle_hdr_base: 0x19e40
+TBOOT: 	 vtd_pmr_lo_base: 0x0
+TBOOT: 	 vtd_pmr_lo_size: 0x76200000
+TBOOT: 	 vtd_pmr_hi_base: 0x100000000
+TBOOT: 	 vtd_pmr_hi_size: 0x780000000
+TBOOT: 	 lcp_po_base: 0x0
+TBOOT: 	 lcp_po_size: 0x0 (0)
+TBOOT: 	 capabilities: 0x00000001
+TBOOT: 	     rlp_wake_getsec: 1
+TBOOT: 	     rlp_wake_monitor: 0
+TBOOT: 	     ecx_pgtbl: 0
+TBOOT: 	     stm: 0
+TBOOT: 	     pcr_map_no_legacy: 0
+TBOOT: 	     pcr_map_da: 0
+TBOOT: 	     platform_type: 0
+TBOOT: 	     max_phy_addr: 0
+TBOOT: 	 efi_rsdt_ptr: 0x0
+TBOOT: 	 ext_data_elts[]:
+TBOOT: 		 EVENT_LOG_POINTER:
+TBOOT: 		       size: 16
+TBOOT: 		  elog_addr: 0x7bf3014c
+TBOOT: 			 Event Log Container:
+TBOOT: 			     Signature: TXT Event Container
+TBOOT: 			  ContainerVer: 1.0
+TBOOT: 			   PCREventVer: 1.0
+TBOOT: 			          Size: 20480
+TBOOT: 			  EventsOffset: [48,48)
+TBOOT: setting MTRRs for acmod: base=0x7bf00000, size=0x20000, num_pages=32
+TBOOT: The maximum allowed MTRR range size=256 Pages 
+TBOOT: executing GETSEC[SENTER]...
+TBOOT: IA32_FEATURE_CONTROL_MSR: 0000ff07
+TBOOT: CPU is SMX-capable
+TBOOT: SMX is enabled
+TBOOT: TXT chipset and all needed capabilities present
+TBOOT: ******************* TBOOT *******************
+TBOOT:    2016-12-16 12:00 -0800 1.9.5
+TBOOT: *********************************************
+TBOOT: command line: logging=serial,memory,vga measure_nv=true
+TBOOT: IA32_FEATURE_CONTROL_MSR: 0000ff07
+TBOOT: CPU is SMX-capable
+TBOOT: CPU is VMX-capable
+TBOOT: SMX is enabled
+TBOOT: TXT chipset and all needed capabilities present
+TBOOT: SINIT ACM successfully returned...
+TBOOT: IA32_FEATURE_CONTROL_MSR: 0000ff07
+TBOOT: CPU is SMX-capable
+TBOOT: CPU is VMX-capable
+TBOOT: SMX is enabled
+TBOOT: TXT chipset and all needed capabilities present
+TBOOT: BSP is cpu 0
+TBOOT: original e820 map:
+TBOOT: 	0000000000000000 - 000000000009b400  (1)
+TBOOT: 	000000000009b400 - 00000000000a0000  (2)
+TBOOT: 	00000000000e0000 - 0000000000100000  (2)
+TBOOT: 	0000000000100000 - 0000000076219000  (1)
+TBOOT: 	0000000076219000 - 00000000762c6000  (3)
+TBOOT: 	00000000762c6000 - 000000007a1d3000  (1)
+TBOOT: 	000000007a1d3000 - 000000007accf000  (2)
+TBOOT: 	000000007accf000 - 000000007b6ff000  (4)
+TBOOT: 	000000007b6ff000 - 000000007b7d7000  (3)
+TBOOT: 	000000007b7d7000 - 000000007b800000  (1)
+TBOOT: 	000000007b800000 - 0000000090000000  (2)
+TBOOT: 	00000000fed1c000 - 00000000fed25000  (2)
+TBOOT: 	00000000fed30000 - 00000000fed35000  (2)
+TBOOT: 	00000000fed40000 - 00000000fed45000  (2)
+TBOOT: 	00000000ff400000 - 0000000100000000  (2)
+TBOOT: 	0000000100000000 - 0000000880000000  (1)
+TBOOT: TPM: FIFO_INF Locality 0 is open
+TBOOT: TPM: discrete TPM1.2 Family 0x0
+TBOOT: TPM is ready
+TBOOT: TPM nv_locked: TRUE
+TBOOT: TPM timeout values: A: 750, B: 750, C: 750, D: 750
+TBOOT: Wrong timeout B, fallback to 2000
+TBOOT: Wrong timeout C, fallback to 75000
+TBOOT: reading Verified Launch Policy from TPM NV...
+TBOOT: TPM: get capability, return value = 00000002
+TBOOT: TPM: fail to get public data of 0x20000001 in TPM NV
+TBOOT: 	:reading failed
+TBOOT: reading Launch Control Policy from TPM NV...
+TBOOT: TPM: get capability, return value = 00000002
+TBOOT: TPM: fail to get public data of 0x40000001 in TPM NV
+TBOOT: 	:reading failed
+TBOOT: failed to read policy from TPM NV, using default
+TBOOT: policy:
+TBOOT: 	 version: 2
+TBOOT: 	 policy_type: TB_POLTYPE_CONT_NON_FATAL
+TBOOT: 	 hash_alg: TB_HALG_SHA1
+TBOOT: 	 policy_control: 00000001 (EXTEND_PCR17)
+TBOOT: 	 num_entries: 3
+TBOOT: 	 policy entry[0]:
+TBOOT: 		 mod_num: 0
+TBOOT: 		 pcr: none
+TBOOT: 		 hash_type: TB_HTYPE_ANY
+TBOOT: 		 num_hashes: 0
+TBOOT: 	 policy entry[1]:
+TBOOT: 		 mod_num: any
+TBOOT: 		 pcr: 19
+TBOOT: 		 hash_type: TB_HTYPE_ANY
+TBOOT: 		 num_hashes: 0
+TBOOT: 	 policy entry[2]:
+TBOOT: 		 mod_num: nv_raw
+		 nv_index: 40000010
+TBOOT: 		 pcr: 22
+TBOOT: 		 hash_type: TB_HTYPE_ANY
+TBOOT: 		 num_hashes: 0
+TBOOT: TPM: write nv 20000002, offset 00000000, 00000004 bytes, return = 00000002
+TBOOT: Error: write TPM error: 0x2.
+TBOOT: no policy in TPM NV.
+TBOOT: IA32_FEATURE_CONTROL_MSR: 0000ff07
+TBOOT: CPU is SMX-capable
+TBOOT: CPU is VMX-capable
+TBOOT: SMX is enabled
+TBOOT: TXT chipset and all needed capabilities present
+TBOOT: TXT.ERRORCODE: 0xc0000001
+TBOOT: AC module error : acm_type=0x1, progress=0x00, error=0x0
+TBOOT: TXT.ESTS: 0x0
+TBOOT: TXT.E2STS: 0x8
+TBOOT: IA32_FEATURE_CONTROL_MSR: 0000ff07
+TBOOT: CPU is SMX-capable
+TBOOT: CPU is VMX-capable
+TBOOT: SMX is enabled
+TBOOT: TXT chipset and all needed capabilities present
+TBOOT: TXT.HEAP.BASE: 0x7bf20000
+TBOOT: TXT.HEAP.SIZE: 0xe0000 (917504)
+TBOOT: bios_data (@0x7bf20008, 0x2c):
+TBOOT: 	 version: 3
+TBOOT: 	 bios_sinit_size: 0x20000 (131072)
+TBOOT: 	 lcp_pd_base: 0x7b800000
+TBOOT: 	 lcp_pd_size: 0x300c (12300)
+TBOOT: 	 num_logical_procs: 72
+TBOOT: 	 flags: 0x00000000
+TBOOT: IA32_FEATURE_CONTROL_MSR: 0000ff07
+TBOOT: CPU is SMX-capable
+TBOOT: CPU is VMX-capable
+TBOOT: SMX is enabled
+TBOOT: TXT chipset and all needed capabilities present
+TBOOT: Post_launch started ...
+TBOOT: measured launch succeeded
+TBOOT: TXT.HEAP.BASE: 0x7bf20000
+TBOOT: TXT.HEAP.SIZE: 0xe0000 (917504)
+TBOOT: bios_data (@0x7bf20008, 0x2c):
+TBOOT: 	 version: 3
+TBOOT: 	 bios_sinit_size: 0x20000 (131072)
+TBOOT: 	 lcp_pd_base: 0x7b800000
+TBOOT: 	 lcp_pd_size: 0x300c (12300)
+TBOOT: 	 num_logical_procs: 72
+TBOOT: 	 flags: 0x00000000
+TBOOT: os_mle_data (@0x7bf20034, 0x15120):
+TBOOT: 	 version: 3
+TBOOT: 	 loader context addr: 0x10000
+TBOOT: os_sinit_data (@0x7bf35154, 0x7c):
+TBOOT: 	 version: 7
+TBOOT: 	 flags: 0
+TBOOT: 	 mle_ptab: 0x801000
+TBOOT: 	 mle_size: 0x35000 (217088)
+TBOOT: 	 mle_hdr_base: 0x19e40
+TBOOT: 	 vtd_pmr_lo_base: 0x0
+TBOOT: 	 vtd_pmr_lo_size: 0x76200000
+TBOOT: 	 vtd_pmr_hi_base: 0x100000000
+TBOOT: 	 vtd_pmr_hi_size: 0x780000000
+TBOOT: 	 lcp_po_base: 0x0
+TBOOT: 	 lcp_po_size: 0x0 (0)
+TBOOT: 	 capabilities: 0x00000001
+TBOOT: 	     rlp_wake_getsec: 1
+TBOOT: 	     rlp_wake_monitor: 0
+TBOOT: 	     ecx_pgtbl: 0
+TBOOT: 	     stm: 0
+TBOOT: 	     pcr_map_no_legacy: 0
+TBOOT: 	     pcr_map_da: 0
+TBOOT: 	     platform_type: 0
+TBOOT: 	     max_phy_addr: 0
+TBOOT: 	 efi_rsdt_ptr: 0x0
+TBOOT: 	 ext_data_elts[]:
+TBOOT: 		 EVENT_LOG_POINTER:
+TBOOT: 		       size: 16
+TBOOT: 		  elog_addr: 0x7bf3014c
+TBOOT: 			 Event Log Container:
+TBOOT: 			     Signature: TXT Event Container
+TBOOT: 			  ContainerVer: 1.0
+TBOOT: 			   PCREventVer: 1.0
+TBOOT: 			          Size: 20480
+TBOOT: 			  EventsOffset: [48,296)
+TBOOT: 			 Event:
+TBOOT: 			     PCRIndex: 17
+TBOOT: 			         Type: 0x402
+TBOOT: 			       Digest: a3 94 44 a1 3b 3d 42 0d 8d a0 4e 08 8f 9d da 8d c5 0b 46 0d 
+TBOOT: 			         Data: 36 bytes
+			         65 7f 9e b5 d9 4b 91 5a fa 5b a0 5d aa bf 12 63 
+			         bb 0d 45 8a 48 76 05 36 28 af 8f 4f 36 37 d1 49 
+			         00 00 00 00 
+TBOOT: 			 Event:
+TBOOT: 			     PCRIndex: 255
+TBOOT: 			         Type: 0x401
+TBOOT: 			       Digest: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+TBOOT: 			         Data: 4 bytes
+			         00 00 00 00 
+TBOOT: 			 Event:
+TBOOT: 			     PCRIndex: 17
+TBOOT: 			         Type: 0x403
+TBOOT: 			       Digest: 95 0e 47 ad 58 bd 8c 07 2d 2d 9f 4d 7e 13 d9 70 c0 e8 a6 fb 
+TBOOT: 			         Data: 80 bytes
+			         00 00 00 80 30 09 14 20 02 b0 00 00 00 01 ff ff 
+			         ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00 
+			         00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+			         00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+			         00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 
+TBOOT: 			 Event:
+TBOOT: 			     PCRIndex: 18
+TBOOT: 			         Type: 0x404
+TBOOT: 			       Digest: 4c ea 63 13 c0 68 30 07 ff 5b 7f 3e ad da 9b 90 a8 e5 fb c7 
+TBOOT: 			         Data: 0 bytes
+TBOOT: sinit_mle_data (@0x7bf351d0, 0xa90):
+TBOOT: 	 version: 8
+TBOOT: 	 bios_acm_id: 
+	00 00 00 80 30 09 14 20 02 b0 00 00 00 01 ff ff ff ff ff ff 
+TBOOT: 	 edx_senter_flags: 0x00000000
+TBOOT: 	 mseg_valid: 0x0
+TBOOT: 	 sinit_hash:
+	a3 94 44 a1 3b 3d 42 0d 8d a0 4e 08 8f 9d da 8d c5 0b 46 0d 
+TBOOT: 	 mle_hash:
+	4c ea 63 13 c0 68 30 07 ff 5b 7f 3e ad da 9b 90 a8 e5 fb c7 
+TBOOT: 	 stm_hash:
+	00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+TBOOT: 	 lcp_policy_hash:
+	00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+TBOOT: 	 lcp_policy_control: 0x00000000
+TBOOT: 	 rlp_wakeup_addr: 0x7bf01df0
+TBOOT: 	 num_mdrs: 6
+TBOOT: 	 mdrs_off: 0xa00
+TBOOT: 	 num_vtd_dmars: 256
+TBOOT: 	 vtd_dmars_off: 0x900
+TBOOT: 	 sinit_mdrs:
+TBOOT: 		 0000000000000000 - 00000000000a0000 (GOOD)
+TBOOT: 		 0000000000100000 - 0000000001000000 (GOOD)
+TBOOT: 		 0000000001000000 - 000000007b800000 (GOOD)
+TBOOT: 		 0000000100000000 - 0000000880000000 (GOOD)
+TBOOT: 		 000000007c000000 - 0000000080000000 (SMRAM NON-OVERLAY)
+TBOOT: 		 0000000080000000 - 0000000090000000 (PCIE EXTENDED CONFIG)
+TBOOT: 	 proc_scrtm_status: 0x00000001
+TBOOT: CPU supports 46 phys address bits
+TBOOT: RSDP (v2, INTEL ) @ 0x0f04
+TBOOT: acpi_table_ioapic @ 0x7b7d04ac, .address = 0xfec00000
+TBOOT: acpi_table_mcfg @ 0x7b7cf000, .base_address = 0x80000000
+TBOOT: mtrr_def_type: e = 1, fe = 1, type = 6
+TBOOT: mtrrs:
+TBOOT: 		    base          mask      type  v
+TBOOT: 		0000000080000 00003fff80000  00  01
+TBOOT: 		0000380000000 00003f8000000  00  01
+TBOOT: 		0000000000000 0000000000000  00  00
+TBOOT: 		0000000000000 0000000000000  00  00
+TBOOT: 		0000000000000 0000000000000  00  00
+TBOOT: 		0000000000000 0000000000000  00  00
+TBOOT: 		0000000000000 0000000000000  00  00
+TBOOT: 		0000000000000 0000000000000  00  00
+TBOOT: 		0000000000000 0000000000000  00  00
+TBOOT: 		0000000000000 0000000000000  00  00
+TBOOT: discarding RAM above reserved regions: 0x762c6000 - 0x7a1d3000
+TBOOT: discarding RAM above reserved regions: 0x7b7d7000 - 0x7b800000
+TBOOT: reserving 0x76200000 - 0x76219000, which was truncated for VT-d
+TBOOT: min_lo_ram: 0x0, max_lo_ram: 0x76219000
+TBOOT: min_hi_ram: 0x100000000, max_hi_ram: 0x880000000
+TBOOT: MSR for SMM monitor control on BSP is 0x0.
+TBOOT: verifying ILP is opt-out or has the same MSEG header with TXT.MSEG.BASE
+		opt-out
+TBOOT:  : succeeded.
+TBOOT: enabling SMIs on BSP
+TBOOT: mle_join.entry_point = 804200
+TBOOT: mle_join.seg_sel = 8
+TBOOT: mle_join.gdt_base = 805000
+TBOOT: mle_join.gdt_limit = 3f
+TBOOT: joining RLPs to MLE with GETSEC[WAKEUP]
+TBOOT: cpu 34 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 34 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 34
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 34
+TBOOT: VMXON done for cpu 34
+TBOOT: GETSEC[WAKEUP] completed
+TBOOT: cpu 96 waking up from TXT sleep
+TBOOT: launching mini-guest for cpu 34
+TBOOT: MSR for SMM monitor control on cpu 96 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 96
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 96
+TBOOT: VMXON done for cpu 96
+TBOOT: waiting for all APs (71) to enter wait-for-sipi...
+TBOOT: cpu 101 waking up from TXT sleep
+TBOOT: launching mini-guest for cpu 96
+TBOOT: MSR for SMM monitor control on cpu 101 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 101
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 101
+TBOOT: VMXON done for cpu 101
+TBOOT: .launching mini-guest for cpu 101
+TBOOT: cpu 4 waking up from TXT sleep
+TBOOT: 
+TBOOT: MSR for SMM monitor control on cpu 4 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 4
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 4
+TBOOT: VMXON done for cpu 4
+TBOOT: launching mini-guest for cpu 4
+TBOOT: cpu 86 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 86 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 86
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 86
+TBOOT: VMXON done for cpu 86
+TBOOT: launching mini-guest for cpu 86
+TBOOT: cpu 87 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 87 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 87
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 87
+TBOOT: VMXON done for cpu 87
+TBOOT: launching mini-guest for cpu 87
+TBOOT: cpu 97 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 97 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 97
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 97
+TBOOT: VMXON done for cpu 97
+TBOOT: launching mini-guest for cpu 97
+TBOOT: cpu 71 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 71 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 71
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 71
+TBOOT: VMXON done for cpu 71
+TBOOT: .launching mini-guest for cpu 71
+TBOOT: cpu 70 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 70 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 70
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 70
+TBOOT: VMXON done for cpu 70
+TBOOT: launching mini-guest for cpu 70
+TBOOT: cpu 67 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 67 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 67
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 67
+TBOOT: VMXON done for cpu 67
+TBOOT: launching mini-guest for cpu 67
+TBOOT: cpu 66 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 66 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 66
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 66
+TBOOT: VMXON done for cpu 66
+TBOOT: launching mini-guest for cpu 66
+TBOOT: cpu 117 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 117 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 117
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 117
+TBOOT: VMXON done for cpu 117
+TBOOT: launching mini-guest for cpu 117
+TBOOT: cpu 116 waking up from TXT sleep
+TBOOT: .MSR for SMM monitor control on cpu 116 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 116
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 116
+TBOOT: VMXON done for cpu 116
+TBOOT: launching mini-guest for cpu 116
+TBOOT: cpu 113 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 113 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 113
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 113
+TBOOT: VMXON done for cpu 113
+TBOOT: launching mini-guest for cpu 113
+TBOOT: cpu 65 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 65 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 65
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 65
+TBOOT: VMXON done for cpu 65
+TBOOT: cpu 35 waking up from TXT sleep
+TBOOT: launching mini-guest for cpu 65
+TBOOT: MSR for SMM monitor control on cpu 35 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 35
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 35
+TBOOT: VMXON done for cpu 35
+TBOOT: launching mini-guest for cpu 35
+TBOOT: cpu 64 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 64 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 64
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 64
+TBOOT: VMXON done for cpu 64
+TBOOT: .launching mini-guest for cpu 64
+TBOOT: cpu 103 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 103 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 103
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 103
+TBOOT: VMXON done for cpu 103
+TBOOT: launching mini-guest for cpu 103
+TBOOT: cpu 9 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 9 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 9
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 9
+TBOOT: VMXON done for cpu 9
+TBOOT: launching mini-guest for cpu 9
+TBOOT: cpu 85 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 85 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 85
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 85
+TBOOT: VMXON done for cpu 85
+TBOOT: launching mini-guest for cpu 85
+TBOOT: cpu 100 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 100 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 100
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 100
+TBOOT: VMXON done for cpu 100
+TBOOT: launching mini-guest for cpu 100
+TBOOT: cpu 37 waking up from TXT sleep
+TBOOT: .MSR for SMM monitor control on cpu 37 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 37
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 37
+TBOOT: VMXON done for cpu 37
+TBOOT: launching mini-guest for cpu 37
+TBOOT: cpu 83 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 83 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 83
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 83
+TBOOT: VMXON done for cpu 83
+TBOOT: launching mini-guest for cpu 83
+TBOOT: cpu 99 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 99 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 99
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 99
+TBOOT: VMXON done for cpu 99
+TBOOT: launching mini-guest for cpu 99
+TBOOT: cpu 98 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 98 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 98
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 98
+TBOOT: VMXON done for cpu 98
+TBOOT: launching mini-guest for cpu 98
+TBOOT: cpu 68 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 68 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 68
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 68
+TBOOT: VMXON done for cpu 68
+TBOOT: .launching mini-guest for cpu 68
+TBOOT: cpu 73 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 73 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 73
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 73
+TBOOT: VMXON done for cpu 73
+TBOOT: launching mini-guest for cpu 73
+TBOOT: cpu 72 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 72 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 72
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 72
+TBOOT: VMXON done for cpu 72
+TBOOT: launching mini-guest for cpu 72
+TBOOT: cpu 5 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 5 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 5
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 5
+TBOOT: VMXON done for cpu 5
+TBOOT: launching mini-guest for cpu 5
+TBOOT: cpu 118 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 118 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 118
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 118
+TBOOT: VMXON done for cpu 118
+TBOOT: launching mini-guest for cpu 118
+TBOOT: cpu 54 waking up from TXT sleep
+TBOOT: .MSR for SMM monitor control on cpu 54 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 54
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 54
+TBOOT: VMXON done for cpu 54
+TBOOT: launching mini-guest for cpu 54
+TBOOT: cpu 2 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 2 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 2
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 2
+TBOOT: VMXON done for cpu 2
+TBOOT: cpu 32 waking up from TXT sleep
+TBOOT: launching mini-guest for cpu 2
+TBOOT: MSR for SMM monitor control on cpu 32 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 32
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 32
+TBOOT: VMXON done for cpu 32
+TBOOT: cpu 69 waking up from TXT sleep
+TBOOT: launching mini-guest for cpu 32
+TBOOT: MSR for SMM monitor control on cpu 69 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 69
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 69
+TBOOT: VMXON done for cpu 69
+TBOOT: launching mini-guest for cpu 69
+TBOOT: cpu 104 waking up from TXT sleep
+TBOOT: .MSR for SMM monitor control on cpu 104 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 104
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 104
+TBOOT: VMXON done for cpu 104
+TBOOT: launching mini-guest for cpu 104
+TBOOT: cpu 105 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 105 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 105
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 105
+TBOOT: VMXON done for cpu 105
+TBOOT: launching mini-guest for cpu 105
+TBOOT: cpu 114 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 114 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 114
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 114
+TBOOT: VMXON done for cpu 114
+TBOOT: launching mini-guest for cpu 114
+TBOOT: cpu 112 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 112 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 112
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 112
+TBOOT: VMXON done for cpu 112
+TBOOT: launching mini-guest for cpu 112
+TBOOT: cpu 81 waking up from TXT sleep
+TBOOT: .MSR for SMM monitor control on cpu 81 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 81
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 81
+TBOOT: VMXON done for cpu 81
+TBOOT: launching mini-guest for cpu 81
+TBOOT: cpu 80 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 80 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 80
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 80
+TBOOT: VMXON done for cpu 80
+TBOOT: launching mini-guest for cpu 80
+TBOOT: cpu 33 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 33 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 33
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 33
+TBOOT: VMXON done for cpu 33
+TBOOT: launching mini-guest for cpu 33
+TBOOT: cpu 84 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 84 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 84
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 84
+TBOOT: VMXON done for cpu 84
+TBOOT: launching mini-guest for cpu 84
+TBOOT: cpu 82 waking up from TXT sleep
+TBOOT: .MSR for SMM monitor control on cpu 82 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 82
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 82
+TBOOT: VMXON done for cpu 82
+TBOOT: launching mini-guest for cpu 82
+TBOOT: cpu 115 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 115 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 115
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 115
+TBOOT: VMXON done for cpu 115
+TBOOT: launching mini-guest for cpu 115
+TBOOT: cpu 38 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 38 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 38
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 38
+TBOOT: VMXON done for cpu 38
+TBOOT: launching mini-guest for cpu 38
+TBOOT: cpu 39 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 39 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 39
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 39
+TBOOT: VMXON done for cpu 39
+TBOOT: launching mini-guest for cpu 39
+TBOOT: cpu 20 waking up from TXT sleep
+TBOOT: .MSR for SMM monitor control on cpu 20 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 20
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 20
+TBOOT: VMXON done for cpu 20
+TBOOT: launching mini-guest for cpu 20
+TBOOT: cpu 21 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 21 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 21
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 21
+TBOOT: VMXON done for cpu 21
+TBOOT: cpu 119 waking up from TXT sleep
+TBOOT: launching mini-guest for cpu 21
+TBOOT: MSR for SMM monitor control on cpu 119 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 119
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 119
+TBOOT: VMXON done for cpu 119
+TBOOT: launching mini-guest for cpu 119
+TBOOT: cpu 102 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 102 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 102
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 102
+TBOOT: VMXON done for cpu 102
+TBOOT: .launching mini-guest for cpu 102
+TBOOT: cpu 22 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 22 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 22
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 22
+TBOOT: VMXON done for cpu 22
+TBOOT: launching mini-guest for cpu 22
+TBOOT: cpu 23 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 23 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 23
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 23
+TBOOT: VMXON done for cpu 23
+TBOOT: launching mini-guest for cpu 23
+TBOOT: cpu 19 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 19 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 19
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 19
+TBOOT: .VMXON done for cpu 19
+TBOOT: launching mini-guest for cpu 19
+TBOOT: cpu 18 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 18 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 18
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 18
+TBOOT: VMXON done for cpu 18
+TBOOT: launching mini-guest for cpu 18
+TBOOT: cpu 6 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 6 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 6
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 6
+TBOOT: VMXON done for cpu 6
+TBOOT: launching mini-guest for cpu 6
+TBOOT: cpu 50 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 50 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 50
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 50
+TBOOT: VMXON done for cpu 50
+TBOOT: .launching mini-guest for cpu 50
+TBOOT: cpu 51 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 51 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 51
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 51
+TBOOT: VMXON done for cpu 51
+TBOOT: launching mini-guest for cpu 51
+TBOOT: cpu 55 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 55 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 55
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 55
+TBOOT: VMXON done for cpu 55
+TBOOT: launching mini-guest for cpu 55
+TBOOT: cpu 16 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 16 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 16
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 16
+TBOOT: VMXON done for cpu 16
+TBOOT: launching mini-guest for cpu 16
+TBOOT: cpu 36 waking up from TXT sleep
+TBOOT: .MSR for SMM monitor control on cpu 36 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 36
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 36
+TBOOT: VMXON done for cpu 36
+TBOOT: launching mini-guest for cpu 36
+TBOOT: cpu 52 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 52 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 52
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 52
+TBOOT: VMXON done for cpu 52
+TBOOT: launching mini-guest for cpu 52
+TBOOT: cpu 7 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 7 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 7
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 7
+TBOOT: VMXON done for cpu 7
+TBOOT: launching mini-guest for cpu 7
+TBOOT: cpu 48 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 48 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 48
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 48
+TBOOT: VMXON done for cpu 48
+TBOOT: .launching mini-guest for cpu 48
+TBOOT: cpu 49 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 49 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 49
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 49
+TBOOT: VMXON done for cpu 49
+TBOOT: launching mini-guest for cpu 49
+TBOOT: cpu 8 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 8 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 8
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 8
+TBOOT: VMXON done for cpu 8
+TBOOT: launching mini-guest for cpu 8
+TBOOT: cpu 3 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 3 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 3
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 3
+TBOOT: VMXON done for cpu 3
+TBOOT: .cpu 17 waking up from TXT sleep
+TBOOT: launching mini-guest for cpu 3
+TBOOT: MSR for SMM monitor control on cpu 17 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 17
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 17
+TBOOT: VMXON done for cpu 17
+TBOOT: launching mini-guest for cpu 17
+TBOOT: cpu 40 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 40 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 40
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 40
+TBOOT: VMXON done for cpu 40
+TBOOT: launching mini-guest for cpu 40
+TBOOT: cpu 41 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 41 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 41
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 41
+TBOOT: VMXON done for cpu 41
+TBOOT: .launching mini-guest for cpu 41
+TBOOT: cpu 53 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 53 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 53
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 53
+TBOOT: VMXON done for cpu 53
+TBOOT: launching mini-guest for cpu 53
+TBOOT: cpu 1 waking up from TXT sleep
+TBOOT: MSR for SMM monitor control on cpu 1 is 0x0
+TBOOT: verifying ILP's MSR_IA32_SMM_MONITOR_CTL with cpu 1
+	 : succeeded.
+TBOOT: enabling SMIs on cpu 1
+TBOOT: .VMXON done for cpu 1
+TBOOT: 
+TBOOT: launching mini-guest for cpu 1
+TBOOT: all APs in wait-for-sipi
+TBOOT: saved IA32_MISC_ENABLE = 0x00850089
+TBOOT: set TXT.CMD.SECRETS flag
+TBOOT: opened TPM locality 1
+TBOOT: DMAR table @ 0x7b78e000 saved.
+TBOOT: no LCP module found
+TBOOT: protecting TXT heap (7bf20000 - 7bffffff) in e820 table
+TBOOT: protecting SINIT (7bf00000 - 7bf1ffff) in e820 table
+TBOOT: protecting TXT Private Space (fed20000 - fed2ffff) in e820 table
+TBOOT: verifying e820 table against SINIT MDRs: verification succeeded.
+TBOOT: verifying module 0 of mbi (18f000 - 6b339f) in e820 table
+	 (range from 000000000018f000 to 00000000006b33a0 is in E820_RAM)
+TBOOT: : succeeded.
+TBOOT: verifying module 1 of mbi (b55000 - 1eab233) in e820 table
+	 (range from 0000000000b55000 to 0000000001eab234 is in E820_RAM)
+TBOOT: : succeeded.
+TBOOT: verifying tboot and its page table (800000 - b54a5f) in e820 table
+	 (range from 0000000000800000 to 0000000000b54a60 is in E820_RAM)
+TBOOT: : succeeded.
+TBOOT: ELF magic number is not matched, image is not ELF format.
+TBOOT: protecting tboot (800000 - b54fff) in e820 table
+TBOOT: reserving tboot memory log (60000 - 67fff) in e820 table
+TBOOT: adjusted e820 map:
+TBOOT: 	0000000000000000 - 0000000000060000  (1)
+TBOOT: 	0000000000060000 - 0000000000068000  (2)
+TBOOT: 	0000000000068000 - 000000000009b400  (1)
+TBOOT: 	000000000009b400 - 00000000000a0000  (2)
+TBOOT: 	00000000000e0000 - 0000000000100000  (2)
+TBOOT: 	0000000000100000 - 0000000000800000  (1)
+TBOOT: 	0000000000800000 - 0000000000b55000  (2)
+TBOOT: 	0000000000b55000 - 0000000076200000  (1)
+TBOOT: 	0000000076200000 - 0000000076219000  (2)
+TBOOT: 	0000000076219000 - 00000000762c6000  (3)
+TBOOT: 	00000000762c6000 - 000000007a1d3000  (2)
+TBOOT: 	000000007a1d3000 - 000000007accf000  (2)
+TBOOT: 	000000007accf000 - 000000007b6ff000  (4)
+TBOOT: 	000000007b6ff000 - 000000007b7d7000  (3)
+TBOOT: 	000000007b7d7000 - 000000007b800000  (2)
+TBOOT: 	000000007b800000 - 000000007bf00000  (2)
+TBOOT: 	000000007bf00000 - 000000007bf20000  (2)
+TBOOT: 	000000007bf20000 - 000000007c000000  (2)
+TBOOT: 	000000007c000000 - 0000000090000000  (2)
+TBOOT: 	00000000fed1c000 - 00000000fed20000  (2)
+TBOOT: 	00000000fed20000 - 00000000fed30000  (2)
+TBOOT: 	00000000fed30000 - 00000000fed35000  (2)
+TBOOT: 	00000000fed40000 - 00000000fed45000  (2)
+TBOOT: 	00000000ff400000 - 0000000100000000  (2)
+TBOOT: 	0000000100000000 - 0000000880000000  (1)
+TBOOT: verifying policy 
+TBOOT: verifying module "
+root=/dev/mapper/root_vg01-lv_01 ro rd.lvm.lv=root_vg01/lv_01 rhgb quiet intel_i
+ommu=on"...
+TBOOT: 	 OK : da 7f 5b 6e 59 c5 a2 0c 99 03 d0 7e a5 28 d6 1c 4e ee 88 81 
+TBOOT: verifying module ""...
+TBOOT: 	 OK : 1d a9 ca 8c 07 87 ab f3 e3 79 15 40 0e 89 a1 c4 21 5b 37 66 
+TBOOT: all modules are verified
+TBOOT: verifying nv index 0x40000010
+TBOOT: TPM: get capability, return value = 00000002
+TBOOT: TPM: fail to get public data of 0x40000010 in TPM NV
+TBOOT: 	 :reading nv index permission failed
+TBOOT: verifying nv against policy failed.
+TBOOT: pre_k_s3_state:
+TBOOT: 	 vtd_pmr_lo_base: 0x0
+TBOOT: 	 vtd_pmr_lo_size: 0x76200000
+TBOOT: 	 vtd_pmr_hi_base: 0x100000000
+TBOOT: 	 vtd_pmr_hi_size: 0x780000000
+TBOOT: 	 pol_hash: 86 a4 62 b6 f2 09 a2 e0 da d4 4e 8d 89 34 a2 40 59 0d 52 22 
+TBOOT: 	 VL measurements:
+TBOOT: 	   PCR 17 (alg count 1):
+TBOOT: 		   alg 0004: c3 43 84 97 fd a8 27 be 3b 32 1c 53 09 a2 04 f0 c9 e5 39 43 
+TBOOT: 	   PCR 18 (alg count 1):
+TBOOT: 		   alg 0004: da 7f 5b 6e 59 c5 a2 0c 99 03 d0 7e a5 28 d6 1c 4e ee 88 81 
+TBOOT: 	   PCR 19 (alg count 1):
+TBOOT: 		   alg 0004: 1d a9 ca 8c 07 87 ab f3 e3 79 15 40 0e 89 a1 c4 21 5b 37 66 
+TBOOT: TPM: start OSAP, return value = 00000012
+TBOOT: failed to seal data
+TBOOT: 			 Event:
+TBOOT: 			     PCRIndex: 17
+TBOOT: 			         Type: 0x501
+TBOOT: 			       Digest: c3 43 84 97 fd a8 27 be 3b 32 1c 53 09 a2 04 f0 c9 e5 39 43 
+TBOOT: 			         Data: 0 bytes
+TBOOT: 			 Event:
+TBOOT: 			     PCRIndex: 18
+TBOOT: 			         Type: 0x501
+TBOOT: 			       Digest: da 7f 5b 6e 59 c5 a2 0c 99 03 d0 7e a5 28 d6 1c 4e ee 88 81 
+TBOOT: 			         Data: 0 bytes
+TBOOT: 			 Event:
+TBOOT: 			     PCRIndex: 19
+TBOOT: 			         Type: 0x501
+TBOOT: 			       Digest: 1d a9 ca 8c 07 87 ab f3 e3 79 15 40 0e 89 a1 c4 21 5b 37 66 
+TBOOT: 			         Data: 0 bytes
+TBOOT: creation or verification of S3 measurements failed.
+TBOOT: tboot_shared data:
+TBOOT: 	 version: 6
+TBOOT: 	 log_addr: 0x00060000
+TBOOT: 	 shutdown_entry: 0x008041c0
+TBOOT: 	 shutdown_type: 0
+TBOOT: 	 tboot_base: 0x00804000
+TBOOT: 	 tboot_size: 0x350a60
+TBOOT: 	 num_in_wfs: 71
+TBOOT: 	 flags: 0x00000000
+TBOOT: 	 ap_wake_addr: 0x00000000
+TBOOT: 	 ap_wake_trigger: 0
+TBOOT: no LCP module found
+TBOOT: ELF magic number is not matched, image is not ELF format.
+TBOOT: assuming kernel is Linux format
+TBOOT: Initrd from 0x74ea9000 to 0x761ff234
+TBOOT: Kernel (protected mode) from 0x1000000 to 0x15201a0
+TBOOT: Kernel (real mode) from 0x90000 to 0x94200
+TBOOT: Linux cmdline placed in header: 	root=/dev/mapper/root_vg01-lv_01 ro rd.lvm.lv=root_vg01/lv_01 rhgb qui
+TBOOT: 	et intel_iommu=on
+TBOOT: 
+TBOOT: transfering control to kernel @0x1000000...
+TBOOT: VMXOFF done for cpu 2
+TBOOT: cpu 2 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 4
+TBOOT: cpu 4 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 6
+TBOOT: cpu 6 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 8
+TBOOT: cpu 8 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 16
+TBOOT: cpu 16 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 18
+TBOOT: cpu 18 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 20
+TBOOT: cpu 20 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 22
+TBOOT: cpu 22 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 32
+TBOOT: cpu 32 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 34
+TBOOT: cpu 34 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 36
+TBOOT: cpu 36 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 38
+TBOOT: cpu 38 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 40
+TBOOT: cpu 40 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 48
+TBOOT: cpu 48 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 50
+TBOOT: cpu 50 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 52
+TBOOT: cpu 52 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 54
+TBOOT: cpu 54 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 64
+TBOOT: cpu 64 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 66
+TBOOT: cpu 66 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 68
+TBOOT: cpu 68 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 70
+TBOOT: cpu 70 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 72
+TBOOT: cpu 72 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 80
+TBOOT: cpu 80 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 82
+TBOOT: cpu 82 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 84
+TBOOT: cpu 84 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 86
+TBOOT: cpu 86 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 96
+TBOOT: cpu 96 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 98
+TBOOT: cpu 98 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 100
+TBOOT: cpu 100 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 102
+TBOOT: cpu 102 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 104
+TBOOT: cpu 104 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 112
+TBOOT: cpu 112 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 114
+TBOOT: cpu 114 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 116
+TBOOT: cpu 116 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 118
+TBOOT: cpu 118 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 1
+TBOOT: cpu 1 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 3
+TBOOT: cpu 3 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 5
+TBOOT: cpu 5 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 7
+TBOOT: cpu 7 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 9
+TBOOT: cpu 9 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 17
+TBOOT: cpu 17 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 19
+TBOOT: cpu 19 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 21
+TBOOT: cpu 21 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 23
+TBOOT: cpu 23 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 33
+TBOOT: cpu 33 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 35
+TBOOT: cpu 35 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 37
+TBOOT: cpu 37 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 39
+TBOOT: cpu 39 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 41
+TBOOT: cpu 41 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 49
+TBOOT: cpu 49 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 51
+TBOOT: cpu 51 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 53
+TBOOT: cpu 53 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 55
+TBOOT: cpu 55 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 65
+TBOOT: cpu 65 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 67
+TBOOT: cpu 67 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 69
+TBOOT: cpu 69 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 71
+TBOOT: cpu 71 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 73
+TBOOT: cpu 73 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 81
+TBOOT: cpu 81 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 83
+TBOOT: cpu 83 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 85
+TBOOT: cpu 85 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 87
+TBOOT: cpu 87 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 97
+TBOOT: cpu 97 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 99
+TBOOT: cpu 99 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 101
+TBOOT: cpu 101 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 103
+TBOOT: cpu 103 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 105
+TBOOT: cpu 105 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 113
+TBOOT: cpu 113 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 115
+TBOOT: cpu 115 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 117
+TBOOT: cpu 117 waking up, SIPI vector=96000
+TBOOT: VMXOFF done for cpu 119
+TBOOT: cpu 119 waking up, SIPI vector=96000
+
+

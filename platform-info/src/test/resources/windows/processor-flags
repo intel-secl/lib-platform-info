@@ -1,0 +1,1 @@
+sse3 pclmulqdq est tm2 ssse3 fma cx16 xtpr sse4_1 sse4_2 movbe popcnt aes xsave osxsave avx f16c rdrnd hypervisor fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse_36 clfsh acpi mmx fxsr sse sse2 ss htt tm pbe fsgsbase ia32_tsc_adjust  bmi1 hle avx2 smep bmi2 erms rtm dfpucds rdseed adx smap lahf_lm abm prefetchw syscall nx rdtscp lm 

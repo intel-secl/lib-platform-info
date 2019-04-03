@@ -5,9 +5,13 @@
 package com.intel.mtwilson.core.platform.info;
 
 import com.intel.mtwilson.core.common.PlatformInfoException;
-import com.intel.mtwilson.core.common.model.HostInfo;
+import com.intel.mtwilson.core.common.model.*;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.intel.mtwilson.core.common.model.HardwareFeature.*;
 
 /**
  * A class for Platform/Architecture related information for Host
@@ -60,13 +64,73 @@ public class PlatformInfo {
         hostInfo.setProcessorInfo(getProcessorInfo());
         hostInfo.setHardwareUuid(getHardwareUuid());
         hostInfo.setTpmVersion(getTpmVersion());
-        hostInfo.setTxtEnabled((getTxtEnabled()));
+        hostInfo.setTxtEnabled(String.valueOf(getTxtStatus().equals(FeatureStatus.ENABLED.getValue())));
         hostInfo.setTpmEnabled(getTpmEnabled());
+        hostInfo.setTbootInstalled(String.valueOf(getTbootStatus().equals(ComponentStatus.INSTALLED.getValue())));
         hostInfo.setNoOfSockets(getNoOfSockets());
         hostInfo.setHostName(getHostName());
+        hostInfo.setHardwareFeatures(getHardwareFeatures());
         return hostInfo;
     }
 
+    private Map<HardwareFeature, HardwareFeatureDetails> getHardwareFeatures() throws IOException, PlatformInfoException {
+        Map<HardwareFeature, HardwareFeatureDetails> hardwareFeatureDetails = new HashMap<>();
+        hardwareFeatureDetails.put(TPM, getTpmDetails());
+        hardwareFeatureDetails.put(TXT, getTxtDetails());
+        if (!getSuefiStatus().equals(FeatureStatus.UNSUPPORTED.getValue())) {
+            hardwareFeatureDetails.put(SUEFI, getSuefiDetails());
+        }
+        if (!getMktmeStatus().equals(FeatureStatus.UNSUPPORTED.getValue())) {
+            hardwareFeatureDetails.put(MKTME, getMktmeDetails());
+        }
+        if (!getCbntStatus().equals(FeatureStatus.UNSUPPORTED.getValue())) {
+            hardwareFeatureDetails.put(CBNT, getCbntDetails());
+        }
+        return hardwareFeatureDetails;
+    }
+
+    private HardwareFeatureDetails getSuefiDetails() throws IOException, PlatformInfoException {
+        HardwareFeatureDetails suefi = new HardwareFeatureDetails();
+        suefi.setEnabled(getSuefiStatus().equals(FeatureStatus.ENABLED.getValue()));
+        return suefi;
+    }
+
+    private HardwareFeatureDetails getCbntDetails() throws IOException, PlatformInfoException {
+        HardwareFeatureDetails cbnt = new HardwareFeatureDetails();
+        cbnt.setEnabled(getCbntStatus().equals(FeatureStatus.ENABLED.getValue()));
+        Map<String, String> meta = new HashMap<>();
+        meta.put("profile", getCbntProfile());
+        //TODO: Replace dummy values
+        meta.put("force_bit", "true");
+        meta.put("msr", "mk ris kfm");
+        cbnt.setMeta(meta);
+        return cbnt;
+    }
+
+    private HardwareFeatureDetails getMktmeDetails() throws IOException, PlatformInfoException {
+        HardwareFeatureDetails mktme = new HardwareFeatureDetails();
+        mktme.setEnabled(getMktmeStatus().equals(FeatureStatus.ENABLED.getValue()));
+        Map<String, String> meta = new HashMap<>();
+        meta.put("encryption_algorithm", getMktmeEncryptionAlgorithm());
+        meta.put("max_keys_per_cpu", getMktmeMaxKeysPerCpu());
+        mktme.setMeta(meta);
+        return mktme;
+    }
+
+    private HardwareFeatureDetails getTxtDetails() throws IOException, PlatformInfoException {
+        HardwareFeatureDetails txt = new HardwareFeatureDetails();
+        txt.setEnabled(Boolean.valueOf(getTxtStatus()));
+        return txt;
+    }
+
+    private HardwareFeatureDetails getTpmDetails() throws IOException, PlatformInfoException {
+        HardwareFeatureDetails tpm = new HardwareFeatureDetails();
+        tpm.setEnabled(Boolean.valueOf(getTpmEnabled()));
+        Map<String, String> meta = new HashMap<>();
+        meta.put("tpm_version", getTpmVersion());
+        tpm.setMeta(meta);
+        return tpm;
+    }
 
     String biosName;
     /**
@@ -264,7 +328,7 @@ public class PlatformInfo {
         return tpmEnabled;
     }
 
-    String txtEnabled;
+    String txtStatus;
     /**
      * Returns the status of txt(enabled/disabled)
      *
@@ -272,10 +336,115 @@ public class PlatformInfo {
      *
      * @since 1.0
      */
-    public String getTxtEnabled() throws IOException, PlatformInfoException {
-        if (txtEnabled == null) {
-            txtEnabled = String.valueOf(hostInfoCommand.getTxtEnabled());
+    public String getTxtStatus() throws IOException, PlatformInfoException {
+        if (txtStatus == null) {
+            txtStatus = String.valueOf(hostInfoCommand.getTxtStatus());
         }
-        return txtEnabled;
+        return txtStatus;
+    }
+
+    String tbootStatus;
+    /**
+     * Returns the status of tboot(enabled/disabled)
+     *
+     * @return Status of tboot
+     *
+     * @since 1.0
+     */
+    public String getTbootStatus() throws IOException, PlatformInfoException {
+        if (tbootStatus == null) {
+            tbootStatus = String.valueOf(hostInfoCommand.getTbootStatus());
+        }
+        return tbootStatus;
+    }
+
+    String cbntStatus;
+    /**
+     * Returns the status of cbnt(enabled/disabled/unsupported)
+     *
+     * @return Status of cbnt
+     *
+     * @since 1.0
+     */
+    public String getCbntStatus() throws IOException, PlatformInfoException {
+        if (cbntStatus == null) {
+            cbntStatus = String.valueOf(hostInfoCommand.getCbntStatus());
+        }
+        return cbntStatus;
+    }
+
+    String cbntProfile;
+    /**
+     * Returns the profile of cbnt(P0/P4/P5)
+     *
+     * @return Profile of cbnt
+     *
+     * @since 1.0
+     */
+    public String getCbntProfile() throws IOException, PlatformInfoException {
+        if (cbntProfile == null) {
+            cbntProfile = hostInfoCommand.getCbntProfile();
+        }
+        return cbntProfile;
+    }
+
+    String suefiEnabled;
+    /**
+     * Returns the status of suefi(enabled/disabled)
+     *
+     * @return Status of suefi
+     *
+     * @since 1.0
+     */
+    public String getSuefiStatus() throws IOException, PlatformInfoException {
+        if (suefiEnabled == null) {
+            suefiEnabled = String.valueOf(hostInfoCommand.getSuefiStatus());
+        }
+        return suefiEnabled;
+    }
+
+    String mktmeStatus;
+    /**
+     * Returns the status of mktme(enabled/disabled/unsupported)
+     *
+     * @return Status of mktme
+     *
+     * @since 1.0
+     */
+    public String getMktmeStatus() throws IOException, PlatformInfoException {
+        if (mktmeStatus == null) {
+            mktmeStatus = hostInfoCommand.getMktmeStatus();
+        }
+        return mktmeStatus;
+    }
+
+    String mktmeEncryptionAlgorithm;
+    /**
+     * Returns the encryption algorithm of mktme(AES-XTS-128)
+     *
+     * @return Encryption algorithm of mktme
+     *
+     * @since 1.0
+     */
+    public String getMktmeEncryptionAlgorithm() throws IOException, PlatformInfoException {
+        if (mktmeEncryptionAlgorithm == null) {
+            mktmeEncryptionAlgorithm = hostInfoCommand.getMktmeEncryptionAlgorithm();
+        }
+        return mktmeEncryptionAlgorithm;
+    }
+
+    String mktmeMaxKeysPerCpu;
+    /**
+     * Returns the max keys per cpu of mktme
+     *
+     * @return Max keys per cpu of mktme
+     *
+     * @since 1.0
+     */
+    public String getMktmeMaxKeysPerCpu() throws IOException, PlatformInfoException {
+        if (mktmeMaxKeysPerCpu == null) {
+            mktmeMaxKeysPerCpu = String.valueOf(hostInfoCommand.getMktmeMaxKeysPerCpu());
+        }
+        return mktmeMaxKeysPerCpu;
     }
 }

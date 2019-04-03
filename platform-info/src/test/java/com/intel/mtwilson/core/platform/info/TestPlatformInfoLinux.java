@@ -5,23 +5,32 @@
 package com.intel.mtwilson.core.platform.info;
 
 import com.intel.mtwilson.core.common.PlatformInfoException;
+import com.intel.mtwilson.core.common.model.ComponentStatus;
+import com.intel.mtwilson.core.common.model.FeatureStatus;
 import com.intel.mtwilson.core.common.model.HostInfo;
 import com.intel.mtwilson.core.platform.info.mock.HostInfoCommandMockLinux;
-import org.apache.commons.lang.SystemUtils;
 import org.junit.*;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.hamcrest.MatcherAssert.*;
-import static org.junit.Assert.fail;
-import static org.junit.Assume.*;
 import static org.hamcrest.CoreMatchers.is;
 
-public class PlatformInfoTestLinux {
+public class TestPlatformInfoLinux {
 
     private PlatformInfo platformInfo;
     private HostInfo expectedHostInfoLinux;
     private HostInfoCommandMockLinux mockCmd = new HostInfoCommandMockLinux();
+
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -38,6 +47,7 @@ public class PlatformInfoTestLinux {
         expectedHostInfoLinux.setHardwareUuid("76262A9F-A72B-E411-BAB9-001E67C2ECAE");
         expectedHostInfoLinux.setVmmName("QEMU");
         expectedHostInfoLinux.setHostName("RHEL7.3");
+        expectedHostInfoLinux.setTbootInstalled("true");
         expectedHostInfoLinux.setProcessorFlags("fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts mmx fxsr sse sse2 ss syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts nopl xtopology tsc_reliable nonstop_tsc aperfmperf pni ssse3 cx16 sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer hypervisor lahf_lm ida arat epb dtherm tsc_adjust");
     }
 
@@ -115,8 +125,12 @@ public class PlatformInfoTestLinux {
     }
 
     @Test
-    public void getTxtEnabled() throws IOException, PlatformInfoException {
-        assertThat(platformInfo.getTxtEnabled(), is(expectedHostInfoLinux.getTxtEnabled()));
+    public void getTxtStatus() throws IOException, PlatformInfoException {
+        assertThat(String.valueOf(platformInfo.getTxtStatus().equals(FeatureStatus.ENABLED.getValue())), is(expectedHostInfoLinux.getTxtEnabled()));
     }
 
+    @Test
+    public void getTbootStatus() throws IOException, PlatformInfoException {
+        assertThat(String.valueOf(platformInfo.getTbootStatus().equals(ComponentStatus.INSTALLED.getValue())), is(expectedHostInfoLinux.getTbootInstalled()));
+    }
 }

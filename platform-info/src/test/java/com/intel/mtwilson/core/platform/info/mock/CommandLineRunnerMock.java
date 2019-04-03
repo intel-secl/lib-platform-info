@@ -75,7 +75,7 @@ public class CommandLineRunnerMock extends CommandLineRunner {
                 return createResult(readResourceFileAsString(WINDOWS, "bios-name"));
             case "wmic bios get smbiosbiosversion":
                 return createResult(readResourceFileAsString(WINDOWS, "bios-version"));
-            case "wmic datafile where name=\"c:\\\\windows\\\\system32\\\\vmms.exe\" get version":
+            case "wmic datafile where \"name=\'C:\\\\Windows\\\\System32\\\\vmms.exe\'\" get version":
                 return createResult(readResourceFileAsString(WINDOWS, "vmm-version"));
             case "wmic path WIN32_ServerFeature get ID":
                 return createResult("20");
@@ -92,5 +92,10 @@ public class CommandLineRunnerMock extends CommandLineRunner {
             default:
                 return new Result(1, "", "Unmockable command");
         }
+    }
+
+    @Override
+    public Result executeCommand(String baseCmd, boolean handleQuotes, String... args) throws PlatformInfoException, IOException {
+        return executeCommand(baseCmd, args);
     }
 }

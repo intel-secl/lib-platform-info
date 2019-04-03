@@ -6,6 +6,7 @@ package com.intel.mtwilson.core.platform.info;
 
 import com.intel.mtwilson.core.common.ErrorCode;
 import com.intel.mtwilson.core.common.PlatformInfoException;
+import com.intel.mtwilson.core.common.model.*;
 import com.intel.mtwilson.util.exec.Result;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -479,7 +480,7 @@ public class HostInfoCommandLinux implements HostInfoCommand {
     }
 
     @Override
-    public boolean getTpmEnabled() throws PlatformInfoException, IOException {
+    public boolean getTpmEnabled() {
         boolean tpmEnabled = false;
         final String tpmVersion = getTpmVersion();
         try {
@@ -496,33 +497,236 @@ public class HostInfoCommandLinux implements HostInfoCommand {
                 log.debug("The TPM status is : {}", tpmEnabled);
                 return tpmEnabled;
             } else {
-                tpmEnabled = false;
                 log.error("Error in getting the TPM status");
             }
         } catch (PlatformInfoException | IOException Ex) {
-            tpmEnabled = false;
+            log.error("Exception in getting the TPM status - {}", Ex.getMessage());
         }
         return tpmEnabled;
     }
 
     @Override
-    public boolean getTxtEnabled() {
-        boolean txtEnabled = false;
+    public String getTxtStatus() {
+        FeatureStatus txtStatus = FeatureStatus.UNSUPPORTED;
         try {
-            log.debug("Getting TXT Status using \"txt-stat\"");
-            Result result = getRunner().executeCommand("txt-stat");
+            log.debug("Getting TXT Support using 'cpuid -1'");
+            Result result = getRunner().executeCommand("cpuid","-1");
+            String commandResult = result.getStdout();
 
-            if (result.getStdout() != null) {
-                txtEnabled = result.getStdout().contains("TXT measured launch: TRUE");
-                log.debug("The TXT status is : {}", txtEnabled);
+            if (commandResult != null) {
+                log.debug("Getting TXT status using 'rdmsr 0x3a -f 1:0'");
+                if(commandResult.contains("VMX: virtual machine extensions         = true")) {
+                    result = getRunner().executeCommand("rdmsr", "0x3a", "-f", "1:0");
+                    if(result.getStdout() != null) {
+                        if (result.getStdout().trim().equals("3")) {
+                            txtStatus = FeatureStatus.ENABLED;
+                        } else {
+                            txtStatus = FeatureStatus.DISABLED;
+                        }
+                    } else {
+                        log.debug("Error during executing 'rdmsr 0x3a' command");
+                    }
+                }
+                log.debug("The TXT status is : {}", txtStatus);
 
             } else {
-                log.error("Error during executing txt-stat command");
+                log.debug("Error during executing 'cpuid -1' command");
             }
-
         } catch (PlatformInfoException | IOException Ex) {
-            txtEnabled =  false;
+            log.debug("Exception during executing 'cpuid -1' or 'rdmsr 0x3a'command - {}", Ex.getMessage());
         }
-        return txtEnabled;
+        return txtStatus.getValue();
+    }
+
+    @Override
+    public String getCbntStatus() {
+        FeatureStatus cbntStatus = FeatureStatus.UNSUPPORTED;
+        try {
+            log.debug("Getting CBnT Status using \"rdmsr -xf 32:32 0x13A\"");
+            Result result = getRunner().executeCommand("rdmsr", "-f", "32:32", "0x13A");
+
+            if (result.getExitCode() == 0 && result.getStdout() != null) {
+                String output = result.getStdout().trim();
+                /*
+                The MSR 0x13a [32] bit is set if CBnT is supported
+                 */
+                if (Integer.valueOf(output) == 1) {
+                    /*
+                     Boot guard disabled is bootguard with profile 0
+                     BTGP0 has MSR[7:4] = 0 (Verify/Measure/FACB) and MSR[0] = 0 (BTG enabled and passed startup ACM)
+                     */
+                    Result bitsVMF = getRunner().executeCommand("rdmsr", "-f", "7:4", "0x13A");
+                    Result bitBTGEnabled = getRunner().executeCommand("rdmsr", "-f", "0:0", "0x13A");
+                    if (Integer.valueOf(bitsVMF.getStdout().trim()) == 0 && Integer.valueOf(bitBTGEnabled.getStdout().trim()) == 0){
+                        cbntStatus = FeatureStatus.DISABLED;
+                    } else {
+                        cbntStatus = FeatureStatus.ENABLED;
+                    }
+                }
+                log.debug("The CBnT status is : {}", cbntStatus.getValue());
+            } else {
+                log.debug("Error during executing 'rdmsr -xf 32:32 0x13A' command");
+            }
+        } catch (PlatformInfoException | IOException Ex) {
+            log.debug("Exception during executing 'rdmsr -xf 32:32 0x13A' command - {}", Ex.getMessage());
+        }
+        return cbntStatus.getValue();
+    }
+
+
+    @Override
+    public String getCbntProfile() {
+        BootGuardProfile cbntProfile = null;
+        if(getCbntStatus().equals(FeatureStatus.ENABLED.getValue())) {
+            try {
+                log.debug("Getting CBNT Profile using \"rdmsr -f 7:0 0x13A\"");
+                Result result = getRunner().executeCommand("rdmsr", "-f", "7:0", "0x13A");
+                if (result.getStdout() != null) {
+                    String output = result.getStdout().trim().toUpperCase();
+                    if (BootGuardProfile.BTGP5.getValue().equals(output)) {
+                        cbntProfile = BootGuardProfile.BTGP5;
+                    } else if (BootGuardProfile.BTGP4.getValue().equals(output)) {
+                        cbntProfile = BootGuardProfile.BTGP4;
+                    }
+                    log.debug("The CBNT profile is : {}", cbntProfile);
+                } else {
+                    log.debug("Error during executing 'rdmsr -f 7:0 0x13A' command");
+                }
+            } catch (PlatformInfoException | IOException Ex) {
+                log.debug("Exception during executing 'rdmsr -f 7:0 0x13A' command - {}", Ex.getMessage());
+            }
+        }
+        return cbntProfile == null ? "" : cbntProfile.getName();
+    }
+
+    @Override
+    public String getSuefiStatus() {
+        FeatureStatus suefiEnabled = FeatureStatus.UNSUPPORTED; // EFI variables are not supported on this system
+        try {
+            log.debug("Getting SUEFI Status using \"mokutil --sb-state\"");
+            Result result = getRunner().executeCommand("mokutil", "--sb-state");
+            if (result.getStdout() != null) {
+                if(result.getStdout().contains("enabled")) { // SecureBoot enabled
+                    suefiEnabled = FeatureStatus.ENABLED;
+                } else if(result.getStdout().contains("disabled")) { // SecureBoot disabled
+                    suefiEnabled = FeatureStatus.DISABLED;
+                }
+                log.debug("The SUEFI status is : {}", suefiEnabled);
+            } else {
+                log.debug("Error during executing 'mokutil --sb-state' command");
+            }
+        } catch (PlatformInfoException | IOException Ex) {
+            log.debug("Exception during executing 'mokutil --sb-state' command - {}", Ex.getMessage());
+        }
+        return suefiEnabled.getValue();
+    }
+
+    @Override
+    public String getMktmeStatus() {
+        FeatureStatus mktmeStatus = FeatureStatus.UNSUPPORTED;
+        try {
+            log.debug("Getting MKTME Status using \"rdmsr -xf 1:1 0x982\"");
+            Result result = getRunner().executeCommand("rdmsr", "-xf", "1:1", "0x982");
+            /*
+            Sample response for "rdmsr -xf 1:1 0x982"
+            1
+             */
+            if (result.getExitCode() == 0 && result.getStdout() != null) {
+                String output = result.getStdout().trim().toUpperCase();
+                /*
+                This bit is 1 for MKTME enabled
+                 */
+                if (Integer.valueOf(output) == 1) {
+                    mktmeStatus = FeatureStatus.ENABLED;
+                } else {
+                    mktmeStatus = FeatureStatus.DISABLED;
+                }
+                log.debug("The MKTME status is : {}", mktmeStatus.getValue());
+            } else {
+                log.debug("Error during executing 'rdmsr -xf 1:1 0x982' command");
+            }
+        } catch (PlatformInfoException | IOException Ex) {
+            log.debug("Exception during executing 'rdmsr -xf 1:1 0x982' command - {}", Ex.getMessage());
+        }
+        return mktmeStatus.getValue();
+    }
+
+    @Override
+    public String getMktmeEncryptionAlgorithm() {
+        MktmeAlgorithm mktmeAlgorithm = null;
+        if (getMktmeStatus().equals(FeatureStatus.ENABLED.getValue())) {
+            try {
+                log.debug("Getting MKTME Algorithm using \"rdmsr -xf 7:4 0x982\"");
+                Result result = getRunner().executeCommand("rdmsr", "-xf", "7:4", "0x982");
+                /*
+                Sample response for "rdmsr -xf 7:4 0x982"
+                0
+                 */
+                if (result.getExitCode() == 0 && result.getStdout() != null) {
+                    String output = result.getStdout().trim().toUpperCase();
+                    /*
+                    These bits are all 0s for AES-XTS-128 encryption algorithm
+                     */
+                    if (Integer.valueOf(output) == 0) {
+                        mktmeAlgorithm = MktmeAlgorithm.AES_XTS_128;
+                        log.debug("The MKTME algorithm is : {}", mktmeAlgorithm.getValue());
+                    }
+                } else {
+                    log.debug("Error during executing 'rdmsr -xf 7:4 0x982' command");
+                }
+            } catch (PlatformInfoException | IOException Ex) {
+                log.debug("Exception during executing 'rdmsr -xf 7:4 0x982' command - {}", Ex.getMessage());
+            }
+        }
+        return mktmeAlgorithm == null ? "" : mktmeAlgorithm.getValue();
+    }
+
+    @Override
+    public int getMktmeMaxKeysPerCpu() {
+        int mktmeMaxKeys = 0;
+        try {
+            log.debug("Getting MKTME Max Keys using \"rdmsr -df 35:32 0x982\"");
+            Result result = getRunner().executeCommand("rdmsr", "-df", "35:32", "0x982");
+            /*
+            Sample response for "rdmsr -df 35:32 0x982"
+            6
+             */
+            if (result.getExitCode() == 0 && result.getStdout() != null) {
+                String output = result.getStdout().trim().toUpperCase();
+                /*
+                These bits give the number of KeyId bits
+                Max keys is then calculated as 2^(KeyId bits) - 1
+
+                These bits are 0s if MKTME is not enabled
+                 */
+                if (Integer.valueOf(output) != 0) {
+                    mktmeMaxKeys = (int) Math.pow(2, Integer.valueOf(output)) - 1;
+                }
+                log.debug("The MKTME max keys are : {}", mktmeMaxKeys);
+            } else {
+                log.debug("Error during executing 'rdmsr -df 35:32 0x982' command");
+            }
+        } catch (PlatformInfoException | IOException Ex) {
+            log.debug("Exception during executing 'rdmsr -df 35:32 0x982' command - {}", Ex.getMessage());
+        }
+        return mktmeMaxKeys;
+    }
+
+    @Override
+    public String getTbootStatus() throws PlatformInfoException, IOException {
+        ComponentStatus tbootInstalled = ComponentStatus.NOT_INSTALLED;
+        try {
+            log.debug("Getting Tboot Status using \"txt-stat\"");
+            Result result = getRunner().executeCommand("txt-stat");
+            if (result.getStdout() != null) {
+                tbootInstalled = ComponentStatus.INSTALLED;
+                log.debug("The Tboot status is : {}", tbootInstalled);
+            } else {
+                log.debug("Error during executing 'txt-stat' command");
+            }
+        } catch (PlatformInfoException | IOException Ex) {
+            log.debug("Exception during executing 'txt-stat' command - {}", Ex.getMessage());
+        }
+        return tbootInstalled.getValue();
     }
 }

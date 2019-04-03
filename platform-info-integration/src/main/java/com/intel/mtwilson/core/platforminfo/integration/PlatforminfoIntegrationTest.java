@@ -148,7 +148,70 @@ public class PlatforminfoIntegrationTest {
      * @return
      */
     @Integration
-    public String getTxtEnabled() throws IOException, PlatformInfoException {
-        return platformInfo.getTxtEnabled();
+    public String getTxtStatus() throws IOException, PlatformInfoException {
+        return platformInfo.getTxtStatus();
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Integration
+    public String getTbootStatus() throws IOException, PlatformInfoException {
+        return platformInfo.getTbootStatus();
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Integration
+    public String getCbntStatus() throws IOException, PlatformInfoException {
+        return platformInfo.getCbntStatus();
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Integration
+    public String getCbntProfile() throws IOException, PlatformInfoException {
+        return platformInfo.getCbntProfile();
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Integration
+    public String getSuefiStatus() throws IOException, PlatformInfoException {
+        return platformInfo.getSuefiStatus();
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Integration
+    public String getMktmeStatus() throws IOException, PlatformInfoException {
+        return platformInfo.getMktmeStatus();
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Integration
+    public String getMktmeEncryptionAlgorithm() throws IOException, PlatformInfoException {
+        return platformInfo.getMktmeEncryptionAlgorithm();
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Integration
+    public String getMktmeMaxKeysPerCpu() throws IOException, PlatformInfoException {
+        return platformInfo.getMktmeMaxKeysPerCpu();
     }
 }

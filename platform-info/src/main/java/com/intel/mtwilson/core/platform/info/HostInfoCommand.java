@@ -39,7 +39,6 @@ public interface HostInfoCommand {
 
     String getProcessorInfo() throws PlatformInfoException, IOException;
 
-
     String[] getProcessorFlags() throws PlatformInfoException, IOException;
 
     String getHardwareUUID() throws IOException, PlatformInfoException;
@@ -52,5 +51,19 @@ public interface HostInfoCommand {
   
     boolean getTpmEnabled() throws PlatformInfoException, IOException;
 
-    boolean getTxtEnabled() throws PlatformInfoException, IOException;
+    String getTxtStatus() throws PlatformInfoException, IOException;
+
+    String getCbntStatus() throws PlatformInfoException, IOException;
+
+    String getCbntProfile() throws PlatformInfoException, IOException;
+
+    String getSuefiStatus() throws PlatformInfoException, IOException;
+
+    String getMktmeStatus() throws PlatformInfoException, IOException;
+
+    String getMktmeEncryptionAlgorithm() throws PlatformInfoException, IOException;
+
+    int getMktmeMaxKeysPerCpu() throws PlatformInfoException, IOException;
+
+    String getTbootStatus() throws PlatformInfoException, IOException;
 }

@@ -6,6 +6,8 @@ package com.intel.mtwilson.core.platform.info;
 
 import com.intel.mtwilson.core.common.ErrorCode;
 import com.intel.mtwilson.core.common.PlatformInfoException;
+import com.intel.mtwilson.core.common.model.ComponentStatus;
+import com.intel.mtwilson.core.common.model.FeatureStatus;
 import com.intel.mtwilson.util.exec.Result;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -172,7 +174,7 @@ public class HostInfoCommandWindows implements HostInfoCommand {
 
         result = getRunner().executeCommand("wmic", false, "datafile", "where", "\"name=\'C:\\\\Windows\\\\System32\\\\vmms.exe\'\"", "get", "version");
         if (result.getExitCode() != 0) {
-            log.error("Error running command [wmic datafile where name=\"c:\\\\windows\\\\system32\\\\vmms.exe\" get version]: {}", result.getStderr());
+            log.error("Error running command [wmic datafile where \"name=\'C:\\\\Windows\\\\System32\\\\vmms.exe\'\" get version]: {}", result.getStderr());
             throw new PlatformInfoException(ErrorCode.ERROR, result.getStderr());
         }
         log.debug("command stdout: {}", result.getStdout());
@@ -182,10 +184,10 @@ public class HostInfoCommandWindows implements HostInfoCommand {
                 vmmVersion = resultArray[1].replaceAll("\\r|\\s", "");
                 log.debug("VMM version: " + vmmVersion);
             } else {
-                log.error("[wmic datafile where name=\"c:\\\\windows\\\\system32\\\\vmms.exe\" get version] does not return vmm version");
+                log.error("[wmic datafile where \"name=\'C:\\\\Windows\\\\System32\\\\vmms.exe\'\" get version] does not return vmm version");
             }
         } else {
-            log.error("Error executing [wmic datafile where name=\"c:\\\\windows\\\\system32\\\\vmms.exe\" get version]");
+            log.error("Error executing [wmic datafile where \"name=\'C:\\\\Windows\\\\System32\\\\vmms.exe\'\" get version]");
         }
 
         return new ImmutablePair<>(vmmName, vmmVersion);
@@ -207,10 +209,10 @@ public class HostInfoCommandWindows implements HostInfoCommand {
                 processorInfo = resultArray[1].replaceAll("\\r|\\s", "");
                 log.debug("OS full Name: " + processorInfo);
             } else {
-                log.error("[wmic os get ProcessorId] does not return ProcessorId");
+                log.error("[wmic cpu get ProcessorId] does not return ProcessorId");
             }
         } else {
-            log.error("Error executing the [wmic os get ProcessorId]");
+            log.error("Error executing the [wmic cpu get ProcessorId]");
         }
         return processorInfo;
     }
@@ -260,10 +262,10 @@ public class HostInfoCommandWindows implements HostInfoCommand {
                 hardwareUuid = resultArray[1].replaceAll("\\s|\\r", "");
                 log.debug("Host UUID: " + hardwareUuid);
             } else {
-                log.error("[wmic path Win32_ComputerSystemProduct] does not return uuid");
+                log.error("[wmic path Win32_ComputerSystemProduct get uuid] does not return uuid");
             }
         } else {
-            log.error("Error executing the [wmic path Win32_ComputerSystemProduct]");
+            log.error("Error executing the [wmic path Win32_ComputerSystemProduct get uuid]");
         }
         return hardwareUuid;
     }
@@ -332,10 +334,10 @@ public class HostInfoCommandWindows implements HostInfoCommand {
                 hostname = resultArray[1].replaceAll("\\r|\\s", "");
                 log.debug("Host Name: " + hostname);
             } else {
-                log.error("[wmic path Win32_ComputerSystemProduct] does not return host name");
+                log.error("[wmic computersystem get Name] does not return host name");
             }
         } else {
-            log.error("Error executing the [wmic path Win32_ComputerSystemProduct]");
+            log.error("Error executing the [wmic computersystem get Name]");
         }
 
         return hostname;
@@ -423,7 +425,42 @@ public class HostInfoCommandWindows implements HostInfoCommand {
     }
 
     @Override
-    public boolean getTxtEnabled() {
-        return false;
+    public String getTxtStatus() {
+        return FeatureStatus.DISABLED.getValue();
+    }
+
+    @Override
+    public String getCbntStatus() throws PlatformInfoException, IOException {
+        return FeatureStatus.UNSUPPORTED.getValue();
+    }
+
+    @Override
+    public String getCbntProfile() throws PlatformInfoException, IOException {
+        return "";
+    }
+
+    @Override
+    public String getSuefiStatus() throws PlatformInfoException, IOException {
+        return FeatureStatus.UNSUPPORTED.getValue();
+    }
+
+    @Override
+    public String getMktmeStatus() throws PlatformInfoException, IOException {
+        return FeatureStatus.UNSUPPORTED.getValue();
+    }
+
+    @Override
+    public String getMktmeEncryptionAlgorithm() throws PlatformInfoException, IOException {
+        return "";
+    }
+
+    @Override
+    public int getMktmeMaxKeysPerCpu() throws PlatformInfoException, IOException {
+        return 0;
+    }
+
+    @Override
+    public String getTbootStatus() throws PlatformInfoException, IOException {
+        return ComponentStatus.UNSUPPORTED.getValue();
     }
 }

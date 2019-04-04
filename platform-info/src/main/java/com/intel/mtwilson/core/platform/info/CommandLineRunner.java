@@ -4,7 +4,6 @@
  */
 package com.intel.mtwilson.core.platform.info;
 
-import com.intel.mtwilson.core.common.ErrorCode;
 import com.intel.mtwilson.core.common.PlatformInfoException;
 import com.intel.mtwilson.util.exec.ExecUtil;
 import com.intel.mtwilson.util.exec.Result;
@@ -12,7 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 import org.apache.commons.exec.CommandLine;

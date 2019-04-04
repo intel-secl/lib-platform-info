@@ -7,14 +7,11 @@ package com.intel.mtwilson.core.platform.info;
 import com.intel.mtwilson.core.common.PlatformInfoException;
 import com.intel.mtwilson.core.common.model.HostInfo;
 import com.intel.mtwilson.core.platform.info.mock.HostInfoCommandMockLinux;
-import org.apache.commons.lang.SystemUtils;
 import org.junit.*;
 
 import java.io.IOException;
 
 import static org.hamcrest.MatcherAssert.*;
-import static org.junit.Assert.fail;
-import static org.junit.Assume.*;
 import static org.hamcrest.CoreMatchers.is;
 
 public class PlatformInfoTestLinux {

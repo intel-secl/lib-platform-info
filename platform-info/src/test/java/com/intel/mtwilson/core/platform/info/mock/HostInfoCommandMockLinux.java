@@ -4,12 +4,8 @@
  */
 package com.intel.mtwilson.core.platform.info.mock;
 
-import com.intel.mtwilson.core.common.PlatformInfoException;
 import com.intel.mtwilson.core.platform.info.CommandLineRunner;
-import com.intel.mtwilson.core.platform.info.HostInfoCommand;
 import com.intel.mtwilson.core.platform.info.HostInfoCommandLinux;
-
-import java.io.IOException;
 
 public class HostInfoCommandMockLinux extends HostInfoCommandLinux {
 

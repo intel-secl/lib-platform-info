@@ -424,6 +424,30 @@ public class HostInfoCommandWindows implements HostInfoCommand {
 
     @Override
     public boolean getTxtEnabled() {
-        return false;
+        boolean txtEnabled = false;
+        boolean txtSupported = false;
+        try {
+            log.debug("Checking if TXT is supported and enabled...");
+            log.debug("Running coreinfo application...");
+            Result coreInfoResult = getRunner().executeCommand("coreinfo", "/accepteula");
+            if (coreInfoResult.getStdout() != null) {
+                txtSupported = coreInfoResult.getStdout().contains("Supports Intel trusted execution") &&
+                        coreInfoResult.getStdout().contains("Supports Intel hardware-assisted virtualization");
+                log.debug("Is TXT supported : {}", txtSupported);
+                if (txtSupported) {
+                    log.debug("Running systeminfo command...");
+                    Result systemInfoResult = getRunner().executeCommand("systeminfo");
+                    txtEnabled = systemInfoResult.getStdout().contains("Virtualization Enabled In Firmware: Yes") ||
+                        systemInfoResult.getStdout().contains("A hypervisor has been detected");
+                    log.debug("The TXT status is : {}", txtEnabled);
+                }
+            } else {
+                log.error("Error getting txt status");
+            }
+
+        } catch (PlatformInfoException | IOException Ex) {
+            txtEnabled =  false;
+        }
+        return txtEnabled;
     }
 }

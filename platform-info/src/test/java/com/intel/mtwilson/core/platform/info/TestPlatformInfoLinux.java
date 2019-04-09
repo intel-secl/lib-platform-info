@@ -12,8 +12,10 @@ import com.intel.mtwilson.core.platform.info.mock.HostInfoCommandMockLinux;
 import org.junit.*;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.CoreMatchers.is;
@@ -49,6 +51,10 @@ public class TestPlatformInfoLinux {
         expectedHostInfoLinux.setHostName("RHEL7.3");
         expectedHostInfoLinux.setTbootInstalled("true");
         expectedHostInfoLinux.setProcessorFlags("fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts mmx fxsr sse sse2 ss syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts nopl xtopology tsc_reliable nonstop_tsc aperfmperf pni ssse3 cx16 sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer hypervisor lahf_lm ida arat epb dtherm tsc_adjust");
+        Set<String> installedComponents = new HashSet<>();
+        installedComponents.add("tagent");
+        installedComponents.add("wlagent"); 
+        expectedHostInfoLinux.setInstalledComponents(installedComponents);
     }
 
     @After
@@ -132,5 +138,10 @@ public class TestPlatformInfoLinux {
     @Test
     public void getTbootStatus() throws IOException, PlatformInfoException {
         assertThat(String.valueOf(platformInfo.getTbootStatus().equals(ComponentStatus.INSTALLED.getValue())), is(expectedHostInfoLinux.getTbootInstalled()));
+    }
+
+    @Test
+    public void getInstalledComponents() throws IOException, PlatformInfoException {
+        assertThat(platformInfo.getInstalledComponents(), is(expectedHostInfoLinux.getInstalledComponents()));
     }
 }

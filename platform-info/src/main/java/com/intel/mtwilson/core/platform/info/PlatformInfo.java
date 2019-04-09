@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.intel.mtwilson.core.common.model.HardwareFeature.*;
+import java.util.Set;
 
 /**
  * A class for Platform/Architecture related information for Host
@@ -446,5 +447,20 @@ public class PlatformInfo {
             mktmeMaxKeysPerCpu = String.valueOf(hostInfoCommand.getMktmeMaxKeysPerCpu());
         }
         return mktmeMaxKeysPerCpu;
+    }
+
+    Set<String> installedComponents;
+    /**
+     * Returns the Installed node component names
+     *
+     * @return Installed node component names
+     *
+     * @since 1.0
+     */
+    public Set<String> getInstalledComponents() throws IOException, PlatformInfoException {
+        if (installedComponents == null) {
+            installedComponents = hostInfoCommand.getInstalledComponents();
+        }
+        return installedComponents;
     }
 }

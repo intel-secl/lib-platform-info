@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import static java.nio.file.StandardCopyOption.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Logic to retrieve Platform/Architecture related information for Windows Host
@@ -462,5 +464,10 @@ public class HostInfoCommandWindows implements HostInfoCommand {
     @Override
     public String getTbootStatus() throws PlatformInfoException, IOException {
         return ComponentStatus.UNSUPPORTED.getValue();
+    }
+
+    @Override
+    public Set<String> getInstalledComponents() throws PlatformInfoException, IOException {
+        return new HashSet<>();
     }
 }

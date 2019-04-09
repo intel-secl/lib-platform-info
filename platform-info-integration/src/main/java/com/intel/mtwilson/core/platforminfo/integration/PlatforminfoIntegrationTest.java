@@ -9,6 +9,7 @@ import com.intel.mtwilson.core.common.PlatformInfoException;
 import com.intel.kunit.annotations.*;
 
 import java.io.IOException;
+import java.util.Set;
 
 /**
  *
@@ -213,5 +214,14 @@ public class PlatforminfoIntegrationTest {
     @Integration
     public String getMktmeMaxKeysPerCpu() throws IOException, PlatformInfoException {
         return platformInfo.getMktmeMaxKeysPerCpu();
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Integration
+    public Set<String> getInstalledComponents() throws IOException, PlatformInfoException {
+        return platformInfo.getInstalledComponents();
     }
 }

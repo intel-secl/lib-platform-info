@@ -14,7 +14,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class HostInfoCommandLinux implements HostInfoCommand {
 
@@ -728,5 +730,58 @@ public class HostInfoCommandLinux implements HostInfoCommand {
             log.debug("Exception during executing 'txt-stat' command - {}", Ex.getMessage());
         }
         return tbootInstalled.getValue();
+    }
+
+    @Override
+    public Set<String> getInstalledComponents() {
+        Set<String> installedComponents = new HashSet<>();
+        try {
+            log.debug("Running 'tagent status' command...");
+            Result result = getRunner().executeCommand("tagent", "status");
+            /*
+            Output of command:
+            Trust agent is running
+            */
+            if (result.getExitCode() == 0 && result.getStdout() != null) {
+                String output = result.getStdout().trim();
+                if (output.contains("Trust agent is running")) {
+                    installedComponents.add("tagent");
+                }
+                log.debug("tagent is running");
+            } else if(result.getExitCode() == 1 && result.getStdout() != null
+                    && result.getStdout().trim().contains("Trust agent is not running")){
+                log.debug("tagent is not running");
+            } else {
+                log.error("Error during executing 'tagent status' command");
+            }
+        } catch (PlatformInfoException | IOException Ex) {
+            log.error("Exception during executing 'tagent status'", Ex.getMessage());
+        }
+        try {
+            log.debug("Running 'wlagent status' command...");
+            Result result = getRunner().executeCommand("wlagent", "status");
+            /*
+            Output of command:
+            Workload Agent Status
+             ● workload-agent.service - wlagent
+                Loaded: loaded (/opt/workload-agent/workload-agent.service; enabled; vendor preset: disabled)
+                Active: active (running) since Tue 2019-03-05 11:49:40 PST; 6 days ago
+              Main PID: 14152 (wlagent)
+                 Tasks: 60
+                CGroup: /system.slice/workload-agent.service  
+             */
+            if (result.getExitCode() == 0 && result.getStdout() != null) {
+                String output = result.getStdout().trim();
+                if (output.contains("Active: active (running)")) {
+                    installedComponents.add("wlagent");
+                }
+                log.debug("wlagent is running");
+            } else {
+                log.error("Error during executing 'wlagent status' command");
+            }
+        } catch (PlatformInfoException | IOException Ex) {
+            log.error("Exception during executing 'wlagent status'", Ex.getMessage());
+        }
+        return installedComponents;
     }
 }

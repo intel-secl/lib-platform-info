@@ -7,6 +7,7 @@ package com.intel.mtwilson.core.platform.info;
 import com.intel.mtwilson.core.common.PlatformInfoException;
 
 import java.io.IOException;
+import java.util.Set;
 
 /**
  * Logic to retrieve Platform/Architecture related information for a Host
@@ -66,4 +67,6 @@ public interface HostInfoCommand {
     int getMktmeMaxKeysPerCpu() throws PlatformInfoException, IOException;
 
     String getTbootStatus() throws PlatformInfoException, IOException;
+
+    Set<String> getInstalledComponents() throws PlatformInfoException, IOException;
 }

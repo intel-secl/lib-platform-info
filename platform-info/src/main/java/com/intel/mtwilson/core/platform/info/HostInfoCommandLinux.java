@@ -752,10 +752,10 @@ public class HostInfoCommandLinux implements HostInfoCommand {
                     && result.getStdout().trim().contains("Trust agent is not running")){
                 log.debug("tagent is not running");
             } else {
-                log.error("Error during executing 'tagent status' command");
+                log.error("Error during executing 'wlagent status' command");
             }
         } catch (PlatformInfoException | IOException Ex) {
-            log.error("Exception during executing 'tagent status'", Ex.getMessage());
+            log.error("Exception during executing 'wlagent status'", Ex.getMessage());
         }
         try {
             log.debug("Running 'wlagent status' command...");

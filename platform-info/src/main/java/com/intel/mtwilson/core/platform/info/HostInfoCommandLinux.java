@@ -780,7 +780,7 @@ public class HostInfoCommandLinux implements HostInfoCommand {
                 log.error("Error during executing 'wlagent status' command");
             }
         } catch (PlatformInfoException | IOException Ex) {
-            log.error("Exception during executing 'wlagent status'", Ex.getMessage());
+            log.info("Exception during executing 'wlagent status'", Ex.getMessage());
         }
         return installedComponents;
     }

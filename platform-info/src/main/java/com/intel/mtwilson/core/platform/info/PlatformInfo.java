@@ -71,6 +71,7 @@ public class PlatformInfo {
         hostInfo.setNoOfSockets(getNoOfSockets());
         hostInfo.setHostName(getHostName());
         hostInfo.setHardwareFeatures(getHardwareFeatures());
+        hostInfo.setInstalledComponents(getInstalledComponents());
         return hostInfo;
     }
 

@@ -736,19 +736,14 @@ public class HostInfoCommandLinux implements HostInfoCommand {
     @Override
     public Set<String> getInstalledComponents() {
         Set<String> installedComponents = new HashSet<>();
-        log.debug("Running 'tagent status' command...");
-        if (isComponentInstalled(HostComponents.TAGENT.getValue())) {
-            installedComponents.add(HostComponents.TAGENT.getValue());
-        } else {
-            log.error("Error while executing tagent status command");
-        }
-        log.debug("Running 'wlagent status' command...");
-        if (isComponentInstalled(HostComponents.WLAGENT.getValue())) {
-            installedComponents.add(HostComponents.WLAGENT.getValue());
-        } else {
-            log.error("Error while executing tagent status command");
-        }
-        
+        for(String component : HostComponents.getValues()) {
+            log.debug("Running {} status command...", component);
+            if (isComponentInstalled(component)) {
+                installedComponents.add(component);
+            } else {
+                log.error("Error while executing {} status command", component);
+            }
+        }      
         return installedComponents;
     }
     

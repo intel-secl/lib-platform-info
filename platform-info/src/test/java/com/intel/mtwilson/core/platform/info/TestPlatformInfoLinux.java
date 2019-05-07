@@ -9,6 +9,7 @@ import com.intel.mtwilson.core.common.model.ComponentStatus;
 import com.intel.mtwilson.core.common.model.FeatureStatus;
 import com.intel.mtwilson.core.common.model.HostInfo;
 import com.intel.mtwilson.core.platform.info.mock.HostInfoCommandMockLinux;
+import com.intel.mtwilson.core.common.model.HostComponents;
 import org.junit.*;
 
 import java.io.IOException;
@@ -52,8 +53,8 @@ public class TestPlatformInfoLinux {
         expectedHostInfoLinux.setTbootInstalled("true");
         expectedHostInfoLinux.setProcessorFlags("fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts mmx fxsr sse sse2 ss syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts nopl xtopology tsc_reliable nonstop_tsc aperfmperf pni ssse3 cx16 sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer hypervisor lahf_lm ida arat epb dtherm tsc_adjust");
         Set<String> installedComponents = new HashSet<>();
-        installedComponents.add("tagent");
-        installedComponents.add("wlagent"); 
+        installedComponents.add(HostComponents.TAGENT.getValue());
+        installedComponents.add(HostComponents.TAGENT.getValue()); 
         expectedHostInfoLinux.setInstalledComponents(installedComponents);
     }
 

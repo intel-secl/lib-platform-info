@@ -10,6 +10,7 @@ import com.intel.mtwilson.core.common.model.*;
 import com.intel.mtwilson.util.exec.Result;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import com.intel.mtwilson.core.common.model.HostComponents;
 
 import java.io.File;
 import java.io.IOException;
@@ -735,53 +736,34 @@ public class HostInfoCommandLinux implements HostInfoCommand {
     @Override
     public Set<String> getInstalledComponents() {
         Set<String> installedComponents = new HashSet<>();
-        try {
-            log.debug("Running 'tagent status' command...");
-            Result result = getRunner().executeCommand("tagent", "status");
-            /*
-            Output of command:
-            Trust agent is running
-            */
-            if (result.getExitCode() == 0 && result.getStdout() != null) {
-                String output = result.getStdout().trim();
-                if (output.contains("Trust agent is running")) {
-                    installedComponents.add("tagent");
-                }
-                log.debug("tagent is running");
-            } else if(result.getExitCode() == 1 && result.getStdout() != null
-                    && result.getStdout().trim().contains("Trust agent is not running")){
-                log.debug("tagent is not running");
-            } else {
-                log.error("Error during executing 'wlagent status' command");
-            }
-        } catch (PlatformInfoException | IOException Ex) {
-            log.error("Exception during executing 'wlagent status'", Ex.getMessage());
+        log.debug("Running 'tagent status' command...");
+        if (isComponentInstalled(HostComponents.TAGENT.getValue())) {
+            installedComponents.add(HostComponents.TAGENT.getValue());
+        } else {
+            log.error("Error while executing tagent status command");
         }
-        try {
-            log.debug("Running 'wlagent status' command...");
-            Result result = getRunner().executeCommand("wlagent", "status");
-            /*
-            Output of command:
-            Workload Agent Status
-             ● workload-agent.service - wlagent
-                Loaded: loaded (/opt/workload-agent/workload-agent.service; enabled; vendor preset: disabled)
-                Active: active (running) since Tue 2019-03-05 11:49:40 PST; 6 days ago
-              Main PID: 14152 (wlagent)
-                 Tasks: 60
-                CGroup: /system.slice/workload-agent.service  
-             */
-            if (result.getExitCode() == 0 && result.getStdout() != null) {
-                String output = result.getStdout().trim();
-                if (output.contains("Active: active (running)")) {
-                    installedComponents.add("wlagent");
-                }
-                log.debug("wlagent is running");
-            } else {
-                log.error("Error during executing 'wlagent status' command");
-            }
-        } catch (PlatformInfoException | IOException Ex) {
-            log.info("Exception during executing 'wlagent status'", Ex.getMessage());
+        log.debug("Running 'wlagent status' command...");
+        if (isComponentInstalled(HostComponents.WLAGENT.getValue())) {
+            installedComponents.add(HostComponents.WLAGENT.getValue());
+        } else {
+            log.error("Error while executing tagent status command");
         }
+        
         return installedComponents;
+    }
+    
+    public boolean isComponentInstalled(String componentName) {
+        try{
+            Result result = getRunner().executeCommand(componentName, "status");
+            if (result.getExitCode() == 0 && result.getStdout() != null) {
+                String output = result.getStdout().trim();
+                if (!output.contains("command not found")) {
+                    return true;
+                }
+            }
+        } catch (PlatformInfoException | IOException Ex) {
+            log.info("Exception during executing {} status command", componentName, Ex.getMessage());
+        }        
+        return false;
     }
 }

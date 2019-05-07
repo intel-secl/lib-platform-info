@@ -740,10 +740,8 @@ public class HostInfoCommandLinux implements HostInfoCommand {
             log.debug("Running {} status command...", component);
             if (isComponentInstalled(component)) {
                 installedComponents.add(component);
-            } else {
-                log.error("Error while executing {} status command", component);
             }
-        }      
+        }     
         return installedComponents;
     }
     
@@ -752,13 +750,13 @@ public class HostInfoCommandLinux implements HostInfoCommand {
             Result result = getRunner().executeCommand(componentName, "status");
             if (result.getExitCode() == 0 && result.getStdout() != null) {
                 String output = result.getStdout().trim();
-                if (!output.contains("command not found")) {
+                if (!output.contains("No such file or directory") || !output.contains("command not found")) {
                     return true;
                 }
             }
         } catch (PlatformInfoException | IOException Ex) {
-            log.info("Exception during executing {} status command", componentName, Ex.getMessage());
-        }        
+            log.error("Exception during executing {} status command", componentName, Ex.getMessage());
+        }
         return false;
     }
 }

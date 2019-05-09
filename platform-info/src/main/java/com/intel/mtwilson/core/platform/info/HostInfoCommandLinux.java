@@ -736,15 +736,19 @@ public class HostInfoCommandLinux implements HostInfoCommand {
     @Override
     public Set<String> getInstalledComponents() {
         Set<String> installedComponents = new HashSet<>();
-        for(String component : HostComponents.getValues()) {
-            log.debug("Running {} status command...", component);
-            if (isComponentInstalled(component)) {
+        for (String component : HostComponents.getValues()) {
+            if (component.equals("tagent")) {
                 installedComponents.add(component);
+            } else {
+                log.debug("Running {} status command...", component);
+                if (isComponentInstalled(component)) {
+                    installedComponents.add(component);
+                }
             }
-        }     
+        }
         return installedComponents;
     }
-    
+
     public boolean isComponentInstalled(String componentName) {
         try{
             Result result = getRunner().executeCommand(componentName, "status");
@@ -755,7 +759,7 @@ public class HostInfoCommandLinux implements HostInfoCommand {
                 }
             }
         } catch (PlatformInfoException | IOException Ex) {
-            log.error("Exception during executing {} status command", componentName, Ex.getMessage());
+            log.info("Exception during executing {} status command", componentName, Ex.getMessage());
         }
         return false;
     }

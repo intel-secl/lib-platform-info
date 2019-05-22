@@ -59,8 +59,10 @@ public class CommandLineRunnerMock extends CommandLineRunner {
                 return createResult(readResourceFileAsString(LINUX,"dmidecode.processor"));
             case "dmidecode -s system-uuid":
                 return createResult(readResourceFileAsString(LINUX, "dmidecode.system-uuid"));
-            case "txt-stat":
-                return createResult(readResourceFileAsString(LINUX, "txt-stat"));
+            case "cpuid -1":
+                return createResult(readResourceFileAsString(LINUX, "cpuid"));
+            case "rdmsr 0x3a -f 1:0":
+                return createResult(readResourceFileAsString(LINUX, "rdmsr"));
             case "lscpu":
                 return createResult(readResourceFileAsString(LINUX, "lscpu"));
             case "hostname":

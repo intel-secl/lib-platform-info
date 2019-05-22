@@ -759,7 +759,7 @@ public class HostInfoCommandLinux implements HostInfoCommand {
                 }
             }
         } catch (PlatformInfoException | IOException Ex) {
-            log.info("Exception during executing {} status command", componentName, Ex.getMessage());
+            log.debug("Exception during executing {} status command", componentName, Ex.getMessage());
         }
         return false;
     }

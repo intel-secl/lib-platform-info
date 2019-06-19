@@ -606,20 +606,23 @@ public class HostInfoCommandLinux implements HostInfoCommand {
     public String getSuefiStatus() {
         FeatureStatus suefiEnabled = FeatureStatus.UNSUPPORTED; // EFI variables are not supported on this system
         try {
-            log.debug("Getting SUEFI Status using \"mokutil --sb-state\"");
-            Result result = getRunner().executeCommand("mokutil", "--sb-state");
+            log.debug("Getting SUEFI Status using \"bootctl status\"");
+            Result result = getRunner().executeCommand("bootctl", "status");
             if (result.getStdout() != null) {
-                if(result.getStdout().contains("enabled")) { // SecureBoot enabled
+                if(result.getStdout().contains("Secure Boot: enabled")) { // SecureBoot enabled
                     suefiEnabled = FeatureStatus.ENABLED;
-                } else if(result.getStdout().contains("disabled")) { // SecureBoot disabled
+                } else if(result.getStdout().contains("Secure Boot: disabled")) { // SecureBoot disabled
                     suefiEnabled = FeatureStatus.DISABLED;
+                }
+                else {
+                    suefiEnabled = FeatureStatus.UNSUPPORTED;
                 }
                 log.debug("The SUEFI status is : {}", suefiEnabled);
             } else {
-                log.debug("Error during executing 'mokutil --sb-state' command");
+                log.debug("Error during executing 'bootctl status' command");
             }
         } catch (PlatformInfoException | IOException Ex) {
-            log.debug("Exception during executing 'mokutil --sb-state' command - {}", Ex.getMessage());
+            log.debug("Exception during executing 'bootctl status' command - {}", Ex.getMessage());
         }
         return suefiEnabled.getValue();
     }

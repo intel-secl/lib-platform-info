@@ -121,7 +121,7 @@ public class PlatformInfo {
 
     private HardwareFeatureDetails getTxtDetails() throws IOException, PlatformInfoException {
         HardwareFeatureDetails txt = new HardwareFeatureDetails();
-        txt.setEnabled(Boolean.valueOf(getTxtStatus()));
+        txt.setEnabled(getTxtStatus().equals(FeatureStatus.ENABLED.getValue()));
         return txt;
     }
 

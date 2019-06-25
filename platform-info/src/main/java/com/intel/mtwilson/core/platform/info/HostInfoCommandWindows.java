@@ -427,11 +427,6 @@ public class HostInfoCommandWindows implements HostInfoCommand {
     }
 
     @Override
-    public String getTxtStatus() {
-        return FeatureStatus.DISABLED.getValue();
-    }
-
-    @Override
     public String getCbntStatus() throws PlatformInfoException, IOException {
         return FeatureStatus.UNSUPPORTED.getValue();
     }
@@ -471,31 +466,35 @@ public class HostInfoCommandWindows implements HostInfoCommand {
         return new HashSet<>();
     }
 
-    public boolean getTxtEnabled() {
-        boolean txtEnabled = false;
-        boolean txtSupported = false;
+    @Override
+    public String getTxtStatus() {
+        FeatureStatus txtStatus = FeatureStatus.UNSUPPORTED;
         try {
             log.debug("Checking if TXT is supported and enabled...");
             log.debug("Running coreinfo application...");
             Result coreInfoResult = getRunner().executeCommand("coreinfo", "/accepteula");
             if (coreInfoResult.getStdout() != null) {
-                txtSupported = coreInfoResult.getStdout().contains("Supports Intel trusted execution") &&
-                        coreInfoResult.getStdout().contains("Supports Intel hardware-assisted virtualization");
-                log.debug("Is TXT supported : {}", txtSupported);
-                if (txtSupported) {
+                if (coreInfoResult.getStdout().contains("Supports Intel trusted execution") &&
+                        coreInfoResult.getStdout().contains("Supports Intel hardware-assisted virtualization")) {
+                    log.debug("TXT is supported");
                     log.debug("Running systeminfo command...");
                     Result systemInfoResult = getRunner().executeCommand("systeminfo");
-                    txtEnabled = systemInfoResult.getStdout().contains("Virtualization Enabled In Firmware: Yes") ||
-                        systemInfoResult.getStdout().contains("A hypervisor has been detected");
-                    log.debug("The TXT status is : {}", txtEnabled);
+                    if (systemInfoResult.getStdout() != null && (systemInfoResult.getStdout().contains("Virtualization Enabled In Firmware: Yes") ||
+                               systemInfoResult.getStdout().contains("A hypervisor has been detected"))) {
+                        txtStatus = FeatureStatus.ENABLED;
+                        log.debug("TXT is enabled");
+                    }
+                    else {
+                        txtStatus = FeatureStatus.DISABLED;
+                        log.debug("TXT is disabled");
+                    }
                 }
             } else {
-                log.error("Error getting txt status");
+                log.debug("Error executing 'coreinfo' command");
             }
-
         } catch (PlatformInfoException | IOException Ex) {
-            txtEnabled =  false;
+            log.debug("Exception during executing 'coreinfo' or 'systeminfo' command - {}", Ex.getMessage());
         }
-        return txtEnabled;
+        return txtStatus.getValue();
     }
 }

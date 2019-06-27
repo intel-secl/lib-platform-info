@@ -69,4 +69,6 @@ public interface HostInfoCommand {
     String getTbootStatus() throws PlatformInfoException, IOException;
 
     Set<String> getInstalledComponents() throws PlatformInfoException, IOException;
+
+    boolean isDockerEnv() throws PlatformInfoException, IOException;
 }

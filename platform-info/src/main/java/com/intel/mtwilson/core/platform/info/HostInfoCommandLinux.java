@@ -752,6 +752,11 @@ public class HostInfoCommandLinux implements HostInfoCommand {
         return installedComponents;
     }
 
+    @Override
+    public boolean isDockerEnv() throws PlatformInfoException, IOException {
+        return new File("/.dockerenv").exists();
+    }
+
     public boolean isComponentInstalled(String componentName) {
         try{
             Result result = getRunner().executeCommand(componentName, "status");

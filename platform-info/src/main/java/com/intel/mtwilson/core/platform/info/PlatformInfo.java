@@ -67,6 +67,7 @@ public class PlatformInfo {
         hostInfo.setTpmVersion(getTpmVersion());
         hostInfo.setTxtEnabled(String.valueOf(getTxtStatus().equals(FeatureStatus.ENABLED.getValue())));
         hostInfo.setTpmEnabled(getTpmEnabled());
+        hostInfo.setIsDockerEnv(isDockerEnv());
         hostInfo.setTbootInstalled(String.valueOf(getTbootStatus().equals(ComponentStatus.INSTALLED.getValue())));
         hostInfo.setNoOfSockets(getNoOfSockets());
         hostInfo.setHostName(getHostName());
@@ -132,6 +133,20 @@ public class PlatformInfo {
         meta.put("tpm_version", getTpmVersion());
         tpm.setMeta(meta);
         return tpm;
+    }
+
+    String isDockerEnv;
+    /**
+     * Returns the Docker Env
+     *
+     * @return Docker Env
+     */
+    public String isDockerEnv() throws IOException, PlatformInfoException {
+        // cache results
+        if (isDockerEnv == null) {
+            isDockerEnv = String.valueOf(hostInfoCommand.isDockerEnv());
+        }
+        return isDockerEnv;
     }
 
     String biosName;

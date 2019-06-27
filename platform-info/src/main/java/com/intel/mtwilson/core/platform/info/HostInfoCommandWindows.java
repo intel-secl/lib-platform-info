@@ -467,6 +467,11 @@ public class HostInfoCommandWindows implements HostInfoCommand {
     }
 
     @Override
+    public boolean isDockerEnv() throws PlatformInfoException, IOException {
+        return false; // No support for windows containerized image
+    }
+
+    @Override
     public String getTxtStatus() {
         FeatureStatus txtStatus = FeatureStatus.UNSUPPORTED;
         try {

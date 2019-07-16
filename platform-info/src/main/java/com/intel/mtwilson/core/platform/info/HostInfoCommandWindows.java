@@ -6,6 +6,8 @@ package com.intel.mtwilson.core.platform.info;
 
 import com.intel.mtwilson.core.common.ErrorCode;
 import com.intel.mtwilson.core.common.PlatformInfoException;
+import com.intel.mtwilson.core.common.model.ComponentStatus;
+import com.intel.mtwilson.core.common.model.FeatureStatus;
 import com.intel.mtwilson.util.exec.Result;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -15,6 +17,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import static java.nio.file.StandardCopyOption.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Logic to retrieve Platform/Architecture related information for Windows Host
@@ -172,7 +176,7 @@ public class HostInfoCommandWindows implements HostInfoCommand {
 
         result = getRunner().executeCommand("wmic", false, "datafile", "where", "\"name=\'C:\\\\Windows\\\\System32\\\\vmms.exe\'\"", "get", "version");
         if (result.getExitCode() != 0) {
-            log.error("Error running command [wmic datafile where name=\"c:\\\\windows\\\\system32\\\\vmms.exe\" get version]: {}", result.getStderr());
+            log.error("Error running command [wmic datafile where \"name=\'C:\\\\Windows\\\\System32\\\\vmms.exe\'\" get version]: {}", result.getStderr());
             throw new PlatformInfoException(ErrorCode.ERROR, result.getStderr());
         }
         log.debug("command stdout: {}", result.getStdout());
@@ -182,10 +186,10 @@ public class HostInfoCommandWindows implements HostInfoCommand {
                 vmmVersion = resultArray[1].replaceAll("\\r|\\s", "");
                 log.debug("VMM version: " + vmmVersion);
             } else {
-                log.error("[wmic datafile where name=\"c:\\\\windows\\\\system32\\\\vmms.exe\" get version] does not return vmm version");
+                log.error("[wmic datafile where \"name=\'C:\\\\Windows\\\\System32\\\\vmms.exe\'\" get version] does not return vmm version");
             }
         } else {
-            log.error("Error executing [wmic datafile where name=\"c:\\\\windows\\\\system32\\\\vmms.exe\" get version]");
+            log.error("Error executing [wmic datafile where \"name=\'C:\\\\Windows\\\\System32\\\\vmms.exe\'\" get version]");
         }
 
         return new ImmutablePair<>(vmmName, vmmVersion);
@@ -207,10 +211,10 @@ public class HostInfoCommandWindows implements HostInfoCommand {
                 processorInfo = resultArray[1].replaceAll("\\r|\\s", "");
                 log.debug("OS full Name: " + processorInfo);
             } else {
-                log.error("[wmic os get ProcessorId] does not return ProcessorId");
+                log.error("[wmic cpu get ProcessorId] does not return ProcessorId");
             }
         } else {
-            log.error("Error executing the [wmic os get ProcessorId]");
+            log.error("Error executing the [wmic cpu get ProcessorId]");
         }
         return processorInfo;
     }
@@ -260,10 +264,10 @@ public class HostInfoCommandWindows implements HostInfoCommand {
                 hardwareUuid = resultArray[1].replaceAll("\\s|\\r", "");
                 log.debug("Host UUID: " + hardwareUuid);
             } else {
-                log.error("[wmic path Win32_ComputerSystemProduct] does not return uuid");
+                log.error("[wmic path Win32_ComputerSystemProduct get uuid] does not return uuid");
             }
         } else {
-            log.error("Error executing the [wmic path Win32_ComputerSystemProduct]");
+            log.error("Error executing the [wmic path Win32_ComputerSystemProduct get uuid]");
         }
         return hardwareUuid;
     }
@@ -332,10 +336,10 @@ public class HostInfoCommandWindows implements HostInfoCommand {
                 hostname = resultArray[1].replaceAll("\\r|\\s", "");
                 log.debug("Host Name: " + hostname);
             } else {
-                log.error("[wmic path Win32_ComputerSystemProduct] does not return host name");
+                log.error("[wmic computersystem get Name] does not return host name");
             }
         } else {
-            log.error("Error executing the [wmic path Win32_ComputerSystemProduct]");
+            log.error("Error executing the [wmic computersystem get Name]");
         }
 
         return hostname;
@@ -423,31 +427,79 @@ public class HostInfoCommandWindows implements HostInfoCommand {
     }
 
     @Override
-    public boolean getTxtEnabled() {
-        boolean txtEnabled = false;
-        boolean txtSupported = false;
+    public String getCbntStatus() throws PlatformInfoException, IOException {
+        return FeatureStatus.UNSUPPORTED.getValue();
+    }
+
+    @Override
+    public String getCbntProfile() throws PlatformInfoException, IOException {
+        return "";
+    }
+
+    @Override
+    public String getSuefiStatus() throws PlatformInfoException, IOException {
+        return FeatureStatus.UNSUPPORTED.getValue();
+    }
+
+    @Override
+    public String getMktmeStatus() throws PlatformInfoException, IOException {
+        return FeatureStatus.UNSUPPORTED.getValue();
+    }
+
+    @Override
+    public String getMktmeEncryptionAlgorithm() throws PlatformInfoException, IOException {
+        return "";
+    }
+
+    @Override
+    public int getMktmeMaxKeysPerCpu() throws PlatformInfoException, IOException {
+        return 0;
+    }
+
+    @Override
+    public String getTbootStatus() throws PlatformInfoException, IOException {
+        return ComponentStatus.UNSUPPORTED.getValue();
+    }
+
+    @Override
+    public Set<String> getInstalledComponents() throws PlatformInfoException, IOException {
+        return new HashSet<>();
+    }
+
+    @Override
+    public boolean isDockerEnv() throws PlatformInfoException, IOException {
+        return false; // No support for windows containerized image
+    }
+
+    @Override
+    public String getTxtStatus() {
+        FeatureStatus txtStatus = FeatureStatus.UNSUPPORTED;
         try {
             log.debug("Checking if TXT is supported and enabled...");
             log.debug("Running coreinfo application...");
             Result coreInfoResult = getRunner().executeCommand("coreinfo", "/accepteula");
             if (coreInfoResult.getStdout() != null) {
-                txtSupported = coreInfoResult.getStdout().contains("Supports Intel trusted execution") &&
-                        coreInfoResult.getStdout().contains("Supports Intel hardware-assisted virtualization");
-                log.debug("Is TXT supported : {}", txtSupported);
-                if (txtSupported) {
+                if (coreInfoResult.getStdout().contains("Supports Intel trusted execution") &&
+                        coreInfoResult.getStdout().contains("Supports Intel hardware-assisted virtualization")) {
+                    log.debug("TXT is supported");
                     log.debug("Running systeminfo command...");
                     Result systemInfoResult = getRunner().executeCommand("systeminfo");
-                    txtEnabled = systemInfoResult.getStdout().contains("Virtualization Enabled In Firmware: Yes") ||
-                        systemInfoResult.getStdout().contains("A hypervisor has been detected");
-                    log.debug("The TXT status is : {}", txtEnabled);
+                    if (systemInfoResult.getStdout() != null && (systemInfoResult.getStdout().contains("Virtualization Enabled In Firmware: Yes") ||
+                               systemInfoResult.getStdout().contains("A hypervisor has been detected"))) {
+                        txtStatus = FeatureStatus.ENABLED;
+                        log.debug("TXT is enabled");
+                    }
+                    else {
+                        txtStatus = FeatureStatus.DISABLED;
+                        log.debug("TXT is disabled");
+                    }
                 }
             } else {
-                log.error("Error getting txt status");
+                log.debug("Error executing 'coreinfo' command");
             }
-
         } catch (PlatformInfoException | IOException Ex) {
-            txtEnabled =  false;
+            log.debug("Exception during executing 'coreinfo' or 'systeminfo' command - {}", Ex.getMessage());
         }
-        return txtEnabled;
+        return txtStatus.getValue();
     }
 }

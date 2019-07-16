@@ -7,6 +7,7 @@ package com.intel.mtwilson.core.platform.info;
 import com.intel.mtwilson.core.common.PlatformInfoException;
 
 import java.io.IOException;
+import java.util.Set;
 
 /**
  * Logic to retrieve Platform/Architecture related information for a Host
@@ -39,7 +40,6 @@ public interface HostInfoCommand {
 
     String getProcessorInfo() throws PlatformInfoException, IOException;
 
-
     String[] getProcessorFlags() throws PlatformInfoException, IOException;
 
     String getHardwareUUID() throws IOException, PlatformInfoException;
@@ -52,5 +52,23 @@ public interface HostInfoCommand {
   
     boolean getTpmEnabled() throws PlatformInfoException, IOException;
 
-    boolean getTxtEnabled() throws PlatformInfoException, IOException;
+    String getTxtStatus() throws PlatformInfoException, IOException;
+
+    String getCbntStatus() throws PlatformInfoException, IOException;
+
+    String getCbntProfile() throws PlatformInfoException, IOException;
+
+    String getSuefiStatus() throws PlatformInfoException, IOException;
+
+    String getMktmeStatus() throws PlatformInfoException, IOException;
+
+    String getMktmeEncryptionAlgorithm() throws PlatformInfoException, IOException;
+
+    int getMktmeMaxKeysPerCpu() throws PlatformInfoException, IOException;
+
+    String getTbootStatus() throws PlatformInfoException, IOException;
+
+    Set<String> getInstalledComponents() throws PlatformInfoException, IOException;
+
+    boolean isDockerEnv() throws PlatformInfoException, IOException;
 }

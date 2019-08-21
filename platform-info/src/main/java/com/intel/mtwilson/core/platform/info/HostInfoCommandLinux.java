@@ -195,7 +195,8 @@ public class HostInfoCommandLinux implements HostInfoCommand {
             result = getRunner().executeCommand("virsh", "version");
             if (result == null || result.getExitCode() != 0) {
                 String error = result == null ? "VMM is not installed" : result.getStderr();
-                log.info("Error in running command virsh version: {}, \n Kindly check if hardware virutalization is enabled and KVM is installed", error);
+		log.debug("Error in running command virsh version: {}", error);
+		log.debug("KVM might not be installed or hardware virtualization is not enabled");
                 throw new PlatformInfoException(ErrorCode.ERROR, error);
             }
 

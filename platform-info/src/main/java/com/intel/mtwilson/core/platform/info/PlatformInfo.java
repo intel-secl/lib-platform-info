@@ -83,9 +83,6 @@ public class PlatformInfo {
         if (!getSuefiStatus().equals(FeatureStatus.UNSUPPORTED.getValue())) {
             hardwareFeatureDetails.put(SUEFI, getSuefiDetails());
         }
-        if (!getMktmeStatus().equals(FeatureStatus.UNSUPPORTED.getValue())) {
-            hardwareFeatureDetails.put(MKTME, getMktmeDetails());
-        }
         if (!getCbntStatus().equals(FeatureStatus.UNSUPPORTED.getValue())) {
             hardwareFeatureDetails.put(CBNT, getCbntDetails());
         }
@@ -108,16 +105,6 @@ public class PlatformInfo {
         meta.put("msr", "mk ris kfm");
         cbnt.setMeta(meta);
         return cbnt;
-    }
-
-    private HardwareFeatureDetails getMktmeDetails() throws IOException, PlatformInfoException {
-        HardwareFeatureDetails mktme = new HardwareFeatureDetails();
-        mktme.setEnabled(getMktmeStatus().equals(FeatureStatus.ENABLED.getValue()));
-        Map<String, String> meta = new HashMap<>();
-        meta.put("encryption_algorithm", getMktmeEncryptionAlgorithm());
-        meta.put("max_keys_per_cpu", getMktmeMaxKeysPerCpu());
-        mktme.setMeta(meta);
-        return mktme;
     }
 
     private HardwareFeatureDetails getTxtDetails() throws IOException, PlatformInfoException {
@@ -418,51 +405,6 @@ public class PlatformInfo {
             suefiEnabled = String.valueOf(hostInfoCommand.getSuefiStatus());
         }
         return suefiEnabled;
-    }
-
-    String mktmeStatus;
-    /**
-     * Returns the status of mktme(enabled/disabled/unsupported)
-     *
-     * @return Status of mktme
-     *
-     * @since 1.0
-     */
-    public String getMktmeStatus() throws IOException, PlatformInfoException {
-        if (mktmeStatus == null) {
-            mktmeStatus = hostInfoCommand.getMktmeStatus();
-        }
-        return mktmeStatus;
-    }
-
-    String mktmeEncryptionAlgorithm;
-    /**
-     * Returns the encryption algorithm of mktme(AES-XTS-128)
-     *
-     * @return Encryption algorithm of mktme
-     *
-     * @since 1.0
-     */
-    public String getMktmeEncryptionAlgorithm() throws IOException, PlatformInfoException {
-        if (mktmeEncryptionAlgorithm == null) {
-            mktmeEncryptionAlgorithm = hostInfoCommand.getMktmeEncryptionAlgorithm();
-        }
-        return mktmeEncryptionAlgorithm;
-    }
-
-    String mktmeMaxKeysPerCpu;
-    /**
-     * Returns the max keys per cpu of mktme
-     *
-     * @return Max keys per cpu of mktme
-     *
-     * @since 1.0
-     */
-    public String getMktmeMaxKeysPerCpu() throws IOException, PlatformInfoException {
-        if (mktmeMaxKeysPerCpu == null) {
-            mktmeMaxKeysPerCpu = String.valueOf(hostInfoCommand.getMktmeMaxKeysPerCpu());
-        }
-        return mktmeMaxKeysPerCpu;
     }
 
     Set<String> installedComponents;

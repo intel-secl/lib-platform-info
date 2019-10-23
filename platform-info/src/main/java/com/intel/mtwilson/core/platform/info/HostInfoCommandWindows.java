@@ -442,21 +442,6 @@ public class HostInfoCommandWindows implements HostInfoCommand {
     }
 
     @Override
-    public String getMktmeStatus() throws PlatformInfoException, IOException {
-        return FeatureStatus.UNSUPPORTED.getValue();
-    }
-
-    @Override
-    public String getMktmeEncryptionAlgorithm() throws PlatformInfoException, IOException {
-        return "";
-    }
-
-    @Override
-    public int getMktmeMaxKeysPerCpu() throws PlatformInfoException, IOException {
-        return 0;
-    }
-
-    @Override
     public String getTbootStatus() throws PlatformInfoException, IOException {
         return ComponentStatus.UNSUPPORTED.getValue();
     }

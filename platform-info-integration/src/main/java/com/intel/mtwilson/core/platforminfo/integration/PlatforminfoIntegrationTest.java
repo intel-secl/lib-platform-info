@@ -194,33 +194,6 @@ public class PlatforminfoIntegrationTest {
      * @return
      */
     @Integration
-    public String getMktmeStatus() throws IOException, PlatformInfoException {
-        return platformInfo.getMktmeStatus();
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Integration
-    public String getMktmeEncryptionAlgorithm() throws IOException, PlatformInfoException {
-        return platformInfo.getMktmeEncryptionAlgorithm();
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Integration
-    public String getMktmeMaxKeysPerCpu() throws IOException, PlatformInfoException {
-        return platformInfo.getMktmeMaxKeysPerCpu();
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Integration
     public Set<String> getInstalledComponents() throws IOException, PlatformInfoException {
         return platformInfo.getInstalledComponents();
     }

@@ -60,12 +60,6 @@ public interface HostInfoCommand {
 
     String getSuefiStatus() throws PlatformInfoException, IOException;
 
-    String getMktmeStatus() throws PlatformInfoException, IOException;
-
-    String getMktmeEncryptionAlgorithm() throws PlatformInfoException, IOException;
-
-    int getMktmeMaxKeysPerCpu() throws PlatformInfoException, IOException;
-
     String getTbootStatus() throws PlatformInfoException, IOException;
 
     Set<String> getInstalledComponents() throws PlatformInfoException, IOException;

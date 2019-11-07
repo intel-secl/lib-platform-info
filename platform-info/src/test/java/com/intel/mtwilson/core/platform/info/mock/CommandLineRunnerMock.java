@@ -33,7 +33,7 @@ public class CommandLineRunnerMock extends CommandLineRunner {
     }
 
     private Result createResult(String stdout) {
-        return new Result(0, stdout, "");
+        return new Result(0, stdout.getBytes(), new byte[0]);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class CommandLineRunnerMock extends CommandLineRunner {
                 if (!skipDocker)
                     return createResult(readResourceFileAsString(LINUX, "docker.version"));
                 else
-                    return new Result(1, "", "");
+                    return new Result(1, new byte[0], new byte[0]);
             case "virsh version":
                 return createResult(readResourceFileAsString(LINUX, "virsh.version"));
             case "dmidecode --type processor":
@@ -92,7 +92,7 @@ public class CommandLineRunnerMock extends CommandLineRunner {
             case "wmic cpu get SocketDesignation":
                 return createResult(readResourceFileAsString(WINDOWS, "no-of-sockets"));
             default:
-                return new Result(1, "", "Unmockable command");
+                return new Result(1, new byte[0], "Unmockable command".getBytes());
         }
     }
 
